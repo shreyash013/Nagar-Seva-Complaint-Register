@@ -1,0 +1,383 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reports - Shirol Municipal Council</title>
+<!-- Google Fonts: Public Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#833301",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "surface-variant": "#d3e4fe",
+                        "surface-container": "#e5eeff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#424751",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "primary": "#00346f",
+                        "on-secondary-container": "#294f83",
+                        "tertiary": "#5f2200",
+                        "secondary-container": "#9fc2fe",
+                        "on-tertiary-fixed": "#351000",
+                        "surface-container-high": "#dce9ff",
+                        "primary-fixed": "#d7e2ff",
+                        "tertiary-fixed": "#ffdbcc",
+                        "outline-variant": "#c2c6d3",
+                        "on-primary-fixed": "#001b3f",
+                        "background": "#f8f9ff",
+                        "surface-dim": "#cbdbf5",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface": "#f8f9ff",
+                        "on-secondary-fixed": "#001b3c",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#d5e3ff",
+                        "primary-fixed-dim": "#abc7ff",
+                        "surface-tint": "#255dad",
+                        "tertiary-fixed-dim": "#ffb694",
+                        "on-primary-container": "#9bbdff",
+                        "on-secondary-fixed-variant": "#1f477b",
+                        "surface-container-low": "#eff4ff",
+                        "inverse-primary": "#abc7ff",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "on-background": "#0b1c30",
+                        "secondary-fixed-dim": "#a7c8ff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#ffa77e",
+                        "surface-bright": "#f8f9ff",
+                        "on-surface": "#0b1c30",
+                        "secondary": "#3a5f94",
+                        "primary-container": "#004a99",
+                        "on-primary-fixed-variant": "#00458f",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#d3e4fe",
+                        "outline": "#737783",
+                        "inverse-surface": "#213145"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "sm": "0.25rem",
+                        "md": "0.75rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "16px",
+                        "stack-sm": "12px",
+                        "stack-md": "24px",
+                        "stack-lg": "48px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Public Sans", "sans-serif"],
+                        "display": ["Public Sans", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex">
+<!-- SideNavBar Component -->
+<aside class="flex flex-col py-4 h-screen border-r border-outline-variant bg-surface-container-low w-64 fixed left-0 top-0 shadow-sm z-40 hidden md:flex">
+<!-- Header -->
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+</div>
+<div>
+<h2 class="font-headline font-semibold text-[20px] leading-[28px] text-primary">Admin Panel</h2>
+<p class="font-body text-[14px] text-on-surface-variant">Shirol Nagar Parishad</p>
+</div>
+</div>
+<!-- CTA -->
+<div class="px-4 mb-6">
+<button class="w-full bg-primary text-on-primary font-label text-[14px] font-medium py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Notice
+            </button>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 overflow-y-auto">
+<ul class="space-y-1">
+<!-- Overview -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 transition-colors font-label text-[14px] font-medium hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+                        Overview
+                    </a>
+</li>
+<!-- All Complaints -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 transition-colors font-label text-[14px] font-medium hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">list_alt</span>
+                        All Complaints
+                    </a>
+</li>
+<!-- Ward Analytics -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 transition-colors font-label text-[14px] font-medium hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">map</span>
+                        Ward Analytics
+                    </a>
+</li>
+<!-- Department Performance -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 transition-colors font-label text-[14px] font-medium hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">insights</span>
+                        Department Performance
+                    </a>
+</li>
+<!-- Reports (ACTIVE) -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg mx-2 transition-colors font-label text-[14px] font-medium scale-95 duration-100 shadow-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+                        Reports
+                    </a>
+</li>
+</ul>
+</nav>
+<!-- Footer Links -->
+<div class="mt-auto border-t border-outline-variant pt-4">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 transition-colors font-label text-[14px] font-medium hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+                        Settings
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 transition-colors font-label text-[14px] font-medium hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+                        Help Center
+                    </a>
+</li>
+</ul>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-64 p-margin-mobile md:p-margin-desktop bg-background min-h-screen">
+<!-- Page Header -->
+<header class="mb-stack-lg">
+<h1 class="font-headline font-semibold text-[32px] leading-[40px] text-on-surface">Reports</h1>
+<p class="font-body text-[16px] text-on-surface-variant mt-1">αñàαñ╣αñ╡αñ╛αñ▓ αñ╡αÑìαñ»αñ╡αñ╕αÑìαñÑαñ╛αñ¬αñ¿ (Report Management)</p>
+</header>
+<div class="max-w-container-max mx-auto space-y-stack-md">
+<!-- Generate New Report Section -->
+<section class="bg-surface rounded-lg border border-outline-variant p-6 shadow-sm relative overflow-hidden">
+<!-- Decorative background element -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-surface-container rounded-full blur-3xl -mr-32 -mt-32 opacity-50 pointer-events-none"></div>
+<div class="relative z-10">
+<h2 class="font-headline font-semibold text-[20px] text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">add_chart</span>
+                        Generate New Report
+                        <span class="text-[14px] font-body text-on-surface-variant ml-2 font-normal">(αñ¿αñ╡αÑÇαñ¿ αñàαñ╣αñ╡αñ╛αñ▓ αññαñ»αñ╛αñ░ αñòαñ░αñ╛)</span>
+</h2>
+<form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Category Filter -->
+<div class="flex flex-col gap-2">
+<label class="font-label text-[14px] font-medium text-on-surface" for="report_category">
+                                Report Category
+                                <span class="block text-[12px] text-on-surface-variant font-normal">αñàαñ╣αñ╡αñ╛αñ▓ αñ╢αÑìαñ░αÑçαñúαÑÇ</span>
+</label>
+<select class="w-full rounded bg-surface border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-on-surface font-body text-[16px] py-2" id="report_category">
+<option>Select Category...</option>
+<option>Tax Collection</option>
+<option>Grievance Resolution</option>
+<option>Public Works</option>
+<option>Health &amp; Sanitation</option>
+</select>
+</div>
+<!-- Start Date -->
+<div class="flex flex-col gap-2">
+<label class="font-label text-[14px] font-medium text-on-surface" for="start_date">
+                                Start Date
+                                <span class="block text-[12px] text-on-surface-variant font-normal">αñ╕αÑüαñ░αÑüαñ╡αñ╛αññαÑÇαñÜαÑÇ αññαñ╛αñ░αÑÇαñû</span>
+</label>
+<input class="w-full rounded bg-surface border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-on-surface font-body text-[16px] py-2" id="start_date" type="date"/>
+</div>
+<!-- End Date -->
+<div class="flex flex-col gap-2">
+<label class="font-label text-[14px] font-medium text-on-surface" for="end_date">
+                                End Date
+                                <span class="block text-[12px] text-on-surface-variant font-normal">αñ╢αÑçαñ╡αñƒαñÜαÑÇ αññαñ╛αñ░αÑÇαñû</span>
+</label>
+<input class="w-full rounded bg-surface border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-on-surface font-body text-[16px] py-2" id="end_date" type="date"/>
+</div>
+<!-- Format -->
+<div class="flex flex-col gap-2">
+<label class="font-label text-[14px] font-medium text-on-surface" for="report_format">
+                                Format
+                                <span class="block text-[12px] text-on-surface-variant font-normal">αñ╕αÑìαñ╡αñ░αÑéαñ¬</span>
+</label>
+<select class="w-full rounded bg-surface border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-on-surface font-body text-[16px] py-2" id="report_format">
+<option>PDF Document (.pdf)</option>
+<option>Excel Spreadsheet (.xlsx)</option>
+<option>CSV Data (.csv)</option>
+</select>
+</div>
+<!-- Action Area -->
+<div class="col-span-1 md:col-span-2 lg:col-span-4 flex justify-end mt-4 pt-4 border-t border-outline-variant">
+<button class="bg-primary text-on-primary font-label text-[14px] font-medium px-6 py-2.5 rounded hover:bg-primary-container transition-colors shadow-sm flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+                                Generate Report
+                            </button>
+</div>
+</form>
+</div>
+</section>
+<!-- Recently Generated Reports List -->
+<section class="bg-surface rounded-lg border border-outline-variant shadow-sm overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<h2 class="font-headline font-semibold text-[20px] text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">history</span>
+                        Recent Reports
+                        <span class="text-[14px] font-body text-on-surface-variant ml-2 font-normal">(αñàαñ▓αÑÇαñòαñíαÑÇαñ▓ αñàαñ╣αñ╡αñ╛αñ▓)</span>
+</h2>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="pl-10 pr-4 py-2 rounded border-outline-variant text-[14px] font-body focus:border-primary focus:ring-1 focus:ring-primary bg-surface w-64" placeholder="Search reports..." type="text"/>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="p-4 font-label text-[14px] font-medium text-on-surface-variant">Report Name <span class="block text-[11px] font-normal">αñàαñ╣αñ╡αñ╛αñ▓αñ╛αñÜαÑç αñ¿αñ╛αñ╡</span></th>
+<th class="p-4 font-label text-[14px] font-medium text-on-surface-variant">Generated Date <span class="block text-[11px] font-normal">αññαñ╛αñ░αÑÇαñû</span></th>
+<th class="p-4 font-label text-[14px] font-medium text-on-surface-variant">Generated By <span class="block text-[11px] font-normal">αññαñ»αñ╛αñ░ αñòαñ░αñúαñ╛αñ░αñ╛</span></th>
+<th class="p-4 font-label text-[14px] font-medium text-on-surface-variant">Status <span class="block text-[11px] font-normal">αñ╕αÑìαñÑαñ┐αññαÑÇ</span></th>
+<th class="p-4 font-label text-[14px] font-medium text-on-surface-variant text-right">Actions <span class="block text-[11px] font-normal text-right">αñòαÑâαññαÑÇ</span></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant bg-surface">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+</div>
+<div>
+<p class="font-body text-[16px] font-medium text-on-surface">Monthly Tax Collection Summary</p>
+<p class="font-body text-[12px] text-on-surface-variant">Oct 2023</p>
+</div>
+</div>
+</td>
+<td class="p-4 font-body text-[14px] text-on-surface">24 Nov 2023, 10:30 AM</td>
+<td class="p-4 font-body text-[14px] text-on-surface">System Auto</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-surface-container-highest text-on-surface-variant">
+                                        Ready
+                                    </span>
+</td>
+<td class="p-4 text-right space-x-2">
+<button class="text-primary hover:text-primary-container p-2 rounded hover:bg-surface-container-low transition-colors inline-flex items-center justify-center" title="View">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="text-primary hover:text-primary-container p-2 rounded hover:bg-surface-container-low transition-colors inline-flex items-center justify-center" title="Download PDF">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">table_view</span>
+</div>
+<div>
+<p class="font-body text-[16px] font-medium text-on-surface">Grievance Resolution Q3 Data</p>
+<p class="font-body text-[12px] text-on-surface-variant">Jul - Sep 2023</p>
+</div>
+</div>
+</td>
+<td class="p-4 font-body text-[14px] text-on-surface">22 Nov 2023, 14:15 PM</td>
+<td class="p-4 font-body text-[14px] text-on-surface">Admin User</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-surface-container-highest text-on-surface-variant">
+                                        Ready
+                                    </span>
+</td>
+<td class="p-4 text-right space-x-2">
+<button class="text-primary hover:text-primary-container p-2 rounded hover:bg-surface-container-low transition-colors inline-flex items-center justify-center" title="View">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="text-primary hover:text-primary-container p-2 rounded hover:bg-surface-container-low transition-colors inline-flex items-center justify-center" title="Download Excel">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 (Processing state example) -->
+<tr class="hover:bg-surface-container-lowest transition-colors bg-surface-container-lowest/50">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container text-on-surface-variant flex items-center justify-center opacity-50">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+</div>
+<div>
+<p class="font-body text-[16px] font-medium text-on-surface">Annual Department Performance</p>
+<p class="font-body text-[12px] text-on-surface-variant">FY 2022-2023</p>
+</div>
+</div>
+</td>
+<td class="p-4 font-body text-[14px] text-on-surface">Just now</td>
+<td class="p-4 font-body text-[14px] text-on-surface">You</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-surface-variant text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mr-1.5 animate-pulse"></span>
+                                        Processing
+                                    </span>
+</td>
+<td class="p-4 text-right space-x-2">
+<button class="text-outline p-2 rounded cursor-not-allowed inline-flex items-center justify-center" disabled="" title="View (Processing)">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="text-outline p-2 rounded cursor-not-allowed inline-flex items-center justify-center" disabled="" title="Download (Processing)">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-4 border-t border-outline-variant bg-surface flex items-center justify-between">
+<span class="font-body text-[14px] text-on-surface-variant">Showing 1 to 3 of 45 entries</span>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded flex items-center justify-center border border-outline-variant text-on-surface hover:bg-surface-container-low transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center bg-primary text-on-primary font-label text-[14px]">1</button>
+<button class="w-8 h-8 rounded flex items-center justify-center border border-outline-variant text-on-surface hover:bg-surface-container-low transition-colors font-label text-[14px]">2</button>
+<button class="w-8 h-8 rounded flex items-center justify-center border border-outline-variant text-on-surface hover:bg-surface-container-low transition-colors font-label text-[14px]">3</button>
+<button class="w-8 h-8 rounded flex items-center justify-center border border-outline-variant text-on-surface hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

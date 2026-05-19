@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ward Information - Smart Nagar Parishad Shirol</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#833301",
+                        "on-primary-fixed": "#001b3f",
+                        "tertiary-fixed": "#ffdbcc",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "surface-tint": "#255dad",
+                        "on-error": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f8f9ff",
+                        "secondary": "#3a5f94",
+                        "inverse-surface": "#213145",
+                        "primary-container": "#004a99",
+                        "inverse-on-surface": "#eaf1ff",
+                        "outline-variant": "#c2c6d3",
+                        "tertiary": "#5f2200",
+                        "inverse-primary": "#abc7ff",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container": "#e5eeff",
+                        "secondary-fixed": "#d5e3ff",
+                        "primary-fixed-dim": "#abc7ff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#0b1c30",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#d3e4fe",
+                        "on-secondary-fixed-variant": "#1f477b",
+                        "on-secondary-fixed": "#001b3c",
+                        "secondary-container": "#9fc2fe",
+                        "on-primary-fixed-variant": "#00458f",
+                        "surface-container-high": "#dce9ff",
+                        "surface-bright": "#f8f9ff",
+                        "secondary-fixed-dim": "#a7c8ff",
+                        "outline": "#737783",
+                        "on-tertiary-container": "#ffa77e",
+                        "on-error-container": "#93000a",
+                        "on-background": "#0b1c30",
+                        "on-primary-container": "#9bbdff",
+                        "on-surface-variant": "#424751",
+                        "on-secondary-container": "#294f83",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#d7e2ff",
+                        "on-secondary": "#ffffff",
+                        "primary": "#00346f",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#d3e4fe",
+                        "tertiary-fixed-dim": "#ffb694"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Public Sans", "sans-serif"],
+                        "display": ["Public Sans", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {}
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline, .font-display { font-family: 'Public Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface border-b border-outline-variant w-full fixed top-0 z-50">
+<div class="flex justify-between items-center w-full px-4 md:px-12 h-16 max-w-7xl mx-auto">
+<div class="font-headline font-bold text-xl text-primary">
+                Smart Nagar Parishad Shirol
+            </div>
+<nav class="hidden md:flex space-x-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label font-medium text-sm py-5" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label font-medium text-sm py-5" href="#">Services</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label font-medium text-sm py-5" href="#">Complaints</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-label font-medium text-sm py-5" href="#">Ward Info</a>
+</nav>
+<div class="flex items-center space-x-4 text-primary">
+<button aria-label="Search" class="hover:bg-surface-container-low p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button aria-label="Notifications" class="hover:bg-surface-container-low p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-outline-variant cursor-pointer" data-alt="A small, professional headshot of an individual, serving as a user profile avatar in a clean, modern UI header." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmc-hdzGZjpiEk5k0xA_Hv3Y9VzXg2GQvbYehXPou5tmEhEdEeLzmD9FGWvO6dnu95NFIFAC0rOPf09OvHoY1p0ARlFl9EceRMxXkzg9eGRgd9ZfHewfSXpbYTYk5rKW5BjWgYrXklgwy-YyxYVWd5N0eou2O5QmInTip6t_Sn1M9aNUm3QFJp43nifN1VGvgWVDix5wgkVrA3wT37wTGKNJbY2WA7gnz4C4E_ymohEb7te1K1OYk0UdnbBmnUQGXhA70a5rrqhR_n"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow pt-24 pb-20 md:pb-12 px-4 md:px-12 max-w-7xl mx-auto w-full">
+<div class="mb-8">
+<h1 class="font-headline text-3xl font-bold text-on-surface mb-2">Ward Information <span class="text-secondary text-2xl font-normal ml-2">/ प्रभाग माहिती</span></h1>
+<p class="font-body text-base text-on-surface-variant">Explore detailed information about the wards in Shirol, including your elected representatives.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Map & Search Section -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Search & Filter Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant shadow-sm">
+<h2 class="font-headline text-xl font-semibold text-on-surface mb-4">Find Your Ward</h2>
+<div class="flex flex-col gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface rounded-lg border border-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body text-sm" placeholder="Search by Area Name or PIN Code..." type="text"/>
+</div>
+<div class="flex gap-4">
+<select class="flex-1 bg-surface border border-outline rounded-lg px-3 py-2 font-body text-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none">
+<option value="">Select Ward No.</option>
+<option value="1">Ward 1</option>
+<option value="2">Ward 2</option>
+<option value="3">Ward 3</option>
+</select>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label font-medium text-sm hover:bg-primary-container transition-colors shadow-sm">
+                                Filter
+                            </button>
+</div>
+</div>
+</div>
+<!-- Interactive Map Placeholder -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col h-[400px]">
+<div class="p-4 border-b border-outline-variant bg-surface flex justify-between items-center">
+<h3 class="font-headline text-lg font-semibold text-on-surface">Shirol Ward Map</h3>
+<button class="text-secondary hover:text-primary flex items-center gap-1 font-label text-sm">
+<span class="material-symbols-outlined" style="font-size: 18px;">fullscreen</span> View Full
+                        </button>
+</div>
+<div class="flex-grow bg-surface-variant relative">
+<img alt="Map of Shirol Wards" class="w-full h-full object-cover opacity-80" data-alt="A clean, highly detailed top-down view of an administrative map showing distinct colored zones representing different municipal wards. The map sits on a digital interface with soft lighting and a modern, high-contrast aesthetic typical of a civic dashboard. The color palette incorporates deep blues, soft grays, and light accent colors to delineate borders." data-location="Shirol" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_DNQjzbPnsNbqBxefTT9MVDjx-sztDgOzFXD4VRlDXDKmA982c-IYwEsqnuUCxbtkMCEcI7f2xtcOwWB7EwhnS03wjQOaitM_161hkud0qS0kELwQs4bcAT1Ucvu889yh7if1Jjs5snf2ggptODExAYoFNFF-xFG5-39AUy_8wNg_TkLSWr7nAL_Eyz3fVfXYM6pLxEY1CcnSiTBuT7oYG-YuP6LbqLbG-TPyAkG2Y9nVCWwBKHq0sgrZcLhHDapsKG0IaMrJa-hP"/>
+<!-- Map Overlay Pins -->
+<div class="absolute top-1/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center cursor-pointer group">
+<div class="bg-primary text-on-primary rounded-full w-8 h-8 flex items-center justify-center shadow-lg font-label font-bold text-sm group-hover:scale-110 transition-transform">1</div>
+<div class="w-1 h-3 bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-primary shadow-sm"></div>
+</div>
+<div class="absolute top-1/2 left-2/3 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center cursor-pointer group">
+<div class="bg-secondary text-on-secondary rounded-full w-8 h-8 flex items-center justify-center shadow-lg font-label font-bold text-sm group-hover:scale-110 transition-transform">2</div>
+<div class="w-1 h-3 bg-secondary"></div>
+<div class="w-2 h-2 rounded-full bg-secondary shadow-sm"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Ward List Section -->
+<div class="lg:col-span-7">
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm h-full flex flex-col">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<h2 class="font-headline text-xl font-semibold text-on-surface">Ward Directory</h2>
+<span class="bg-surface-container px-3 py-1 rounded-full text-xs font-label font-semibold text-primary">12 Wards Total</span>
+</div>
+<div class="flex-grow overflow-y-auto p-6 flex flex-col gap-4">
+<!-- Ward Card 1 -->
+<div class="bg-surface rounded-xl p-5 border border-outline-variant hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="bg-primary-container text-on-primary-container w-12 h-12 rounded-lg flex items-center justify-center font-headline font-bold text-xl">
+                                        W1
+                                    </div>
+<div>
+<h3 class="font-headline font-semibold text-lg text-on-surface">Shivaji Chowk Area</h3>
+<p class="font-body text-sm text-on-surface-variant">शिवाजी चौक परिसर</p>
+</div>
+</div>
+<button aria-label="View Details" class="text-secondary hover:text-primary bg-surface-container-low hover:bg-surface-container p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-lg p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<p class="font-label text-xs text-on-surface-variant uppercase tracking-wider mb-1">Corporator</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-size: 18px;">person</span>
+<span class="font-body text-sm font-medium text-on-surface">Ramesh Patil</span>
+</div>
+</div>
+<div>
+<p class="font-label text-xs text-on-surface-variant uppercase tracking-wider mb-1">Contact</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-size: 18px;">call</span>
+<span class="font-body text-sm text-on-surface">+91 98765 43210</span>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant/50 flex gap-2">
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant text-xs font-label rounded">Market Area</span>
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant text-xs font-label rounded">Main Post Office</span>
+</div>
+</div>
+<!-- Ward Card 2 -->
+<div class="bg-surface rounded-xl p-5 border border-outline-variant hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="bg-secondary-container text-on-secondary-container w-12 h-12 rounded-lg flex items-center justify-center font-headline font-bold text-xl">
+                                        W2
+                                    </div>
+<div>
+<h3 class="font-headline font-semibold text-lg text-on-surface">Datta Nagar</h3>
+<p class="font-body text-sm text-on-surface-variant">दत्त नगर</p>
+</div>
+</div>
+<button aria-label="View Details" class="text-secondary hover:text-primary bg-surface-container-low hover:bg-surface-container p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-lg p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<p class="font-label text-xs text-on-surface-variant uppercase tracking-wider mb-1">Corporator</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-size: 18px;">person</span>
+<span class="font-body text-sm font-medium text-on-surface">Sunita Jadhav</span>
+</div>
+</div>
+<div>
+<p class="font-label text-xs text-on-surface-variant uppercase tracking-wider mb-1">Contact</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-size: 18px;">call</span>
+<span class="font-body text-sm text-on-surface">+91 87654 32109</span>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant/50 flex gap-2">
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant text-xs font-label rounded">Residential</span>
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant text-xs font-label rounded">Datta Mandir</span>
+</div>
+</div>
+<!-- Ward Card 3 -->
+<div class="bg-surface rounded-xl p-5 border border-outline-variant hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="bg-surface-container-high text-on-surface w-12 h-12 rounded-lg flex items-center justify-center font-headline font-bold text-xl">
+                                        W3
+                                    </div>
+<div>
+<h3 class="font-headline font-semibold text-lg text-on-surface">Shahu Colony</h3>
+<p class="font-body text-sm text-on-surface-variant">शाहू कॉलनी</p>
+</div>
+</div>
+<button aria-label="View Details" class="text-secondary hover:text-primary bg-surface-container-low hover:bg-surface-container p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-lg p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<p class="font-label text-xs text-on-surface-variant uppercase tracking-wider mb-1">Corporator</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-size: 18px;">person</span>
+<span class="font-body text-sm font-medium text-on-surface">Vijay Kadam</span>
+</div>
+</div>
+<div>
+<p class="font-label text-xs text-on-surface-variant uppercase tracking-wider mb-1">Contact</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-size: 18px;">call</span>
+<span class="font-body text-sm text-on-surface">+91 76543 21098</span>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant/50 flex gap-2">
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant text-xs font-label rounded">Mixed Use</span>
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant text-xs font-label rounded">High School</span>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-outline-variant bg-surface flex justify-center">
+<button class="text-primary hover:text-primary-container font-label font-semibold text-sm flex items-center gap-2 transition-colors">
+                            Load More Wards <span class="material-symbols-outlined" style="font-size: 18px;">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface border-t border-outline-variant shadow-lg rounded-t-xl md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label text-xs">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mb-1">add_circle</span>
+<span class="font-label text-xs">Submit</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-4 py-1" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">map</span>
+<span class="font-label text-xs font-semibold">Ward Info</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label text-xs">Profile</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="bg-surface-container-highest w-full py-8 px-4 md:px-12 mt-auto border-t border-outline-variant">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="font-headline font-semibold text-lg text-on-surface">
+                © 2024 Shirol Municipal Council. All rights reserved. Government of Maharashtra.
+            </div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-on-surface-variant hover:text-on-surface font-label text-sm transition-colors hover:underline" href="#">Public Notices</a>
+<a class="text-primary underline font-label text-sm transition-colors hover:underline" href="#">Ward Map</a>
+<a class="text-on-surface-variant hover:text-on-surface font-label text-sm transition-colors hover:underline" href="#">Contact Us</a>
+<a class="text-on-surface-variant hover:text-on-surface font-label text-sm transition-colors hover:underline" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-on-surface font-label text-sm transition-colors hover:underline" href="#">Right to Information</a>
+</div>
+</div>
+</footer>
+</body></html>

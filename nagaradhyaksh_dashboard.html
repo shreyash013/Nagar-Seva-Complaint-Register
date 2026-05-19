@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Dashboard - Smart Nagar Parishad Shirol</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Marathi:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "primary-container": "#004a99",
+                        "surface-container": "#e5eeff",
+                        "on-surface": "#0b1c30",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#0b1c30",
+                        "on-secondary-fixed-variant": "#1f477b",
+                        "on-surface-variant": "#424751",
+                        "outline": "#737783",
+                        "secondary-fixed-dim": "#a7c8ff",
+                        "tertiary-container": "#833301",
+                        "on-error-container": "#93000a",
+                        "background": "#f8f9ff",
+                        "primary-fixed-dim": "#abc7ff",
+                        "outline-variant": "#c2c6d3",
+                        "tertiary-fixed": "#ffdbcc",
+                        "surface-container-low": "#eff4ff",
+                        "secondary-container": "#9fc2fe",
+                        "on-primary-container": "#9bbdff",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#abc7ff",
+                        "primary": "#00346f",
+                        "secondary": "#3a5f94",
+                        "surface": "#f8f9ff",
+                        "surface-bright": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-primary-fixed": "#001b3f",
+                        "on-secondary-fixed": "#001b3c",
+                        "on-secondary-container": "#294f83",
+                        "tertiary": "#5f2200",
+                        "surface-dim": "#cbdbf5",
+                        "tertiary-fixed-dim": "#ffb694",
+                        "surface-tint": "#255dad",
+                        "on-tertiary-container": "#ffa77e",
+                        "primary-fixed": "#d7e2ff",
+                        "inverse-surface": "#213145",
+                        "surface-container-highest": "#d3e4fe",
+                        "secondary-fixed": "#d5e3ff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "on-primary-fixed-variant": "#00458f",
+                        "surface-container-high": "#dce9ff",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "stack-md": "24px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "48px",
+                        "stack-sm": "12px",
+                        "margin-desktop": "48px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Public Sans", "Noto Sans Marathi", "sans-serif"],
+                        "display-lg": ["Public Sans", "Noto Sans Marathi", "sans-serif"],
+                        "headline-lg-mobile": ["Public Sans", "Noto Sans Marathi", "sans-serif"],
+                        "body-lg": ["Inter", "Noto Sans Marathi", "sans-serif"],
+                        "headline-lg": ["Public Sans", "Noto Sans Marathi", "sans-serif"],
+                        "body-md": ["Inter", "Noto Sans Marathi", "sans-serif"],
+                        "label-sm": ["Inter", "Noto Sans Marathi", "sans-serif"],
+                        "label-md": ["Inter", "Noto Sans Marathi", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex font-body-md text-body-md">
+<nav class="bg-surface-container-low dark:bg-surface-container h-screen w-64 fixed left-0 top-0 shadow-sm dark:shadow-none flex flex-col py-4 border-r border-outline-variant dark:border-outline hidden md:flex z-40">
+<div class="px-gutter mb-stack-md flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-title-md text-title-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-primary dark:text-primary-fixed-dim">Admin Panel</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Shirol Nagar Parishad</p>
+</div>
+</div>
+<div class="px-gutter mb-stack-md">
+<button class="w-full bg-primary text-on-primary py-2 rounded-lg font-label-md text-label-md flex justify-center items-center space-x-2 hover:bg-primary-fixed-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>New Notice</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-1">
+<li>
+<a class="bg-secondary-container dark:bg-primary-container text-on-secondary-container dark:text-on-primary-container rounded-lg mx-2 flex items-center space-x-3 px-4 py-3 font-label-md text-label-md hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Overview</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-dim rounded-lg mx-2 flex items-center space-x-3 px-4 py-3 font-label-md text-label-md hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+<span>All Complaints</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-dim rounded-lg mx-2 flex items-center space-x-3 px-4 py-3 font-label-md text-label-md hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">map</span>
+<span>Ward Analytics</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-dim rounded-lg mx-2 flex items-center space-x-3 px-4 py-3 font-label-md text-label-md hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span>Department Performance</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-dim rounded-lg mx-2 flex items-center space-x-3 px-4 py-3 font-label-md text-label-md hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>Reports</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto pt-4 border-t border-outline-variant">
+<ul class="space-y-1">
+<li>
+<a class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-dim rounded-lg mx-2 flex items-center space-x-3 px-4 py-3 font-label-md text-label-md hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-dim rounded-lg mx-2 flex items-center space-x-3 px-4 py-3 font-label-md text-label-md hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Help Center</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 max-w-container-max mx-auto z-30 sticky top-0 md:hidden">
+<div class="font-title-md text-title-md font-bold text-primary dark:text-primary-fixed-dim">
+                Smart Nagar Parishad Shirol
+            </div>
+<div class="flex items-center space-x-4">
+<button class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<main class="flex-1 p-margin-mobile md:p-margin-desktop w-full max-w-container-max mx-auto pb-32 md:pb-margin-desktop">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-stack-lg gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Command Center</h1>
+<p class="text-on-surface-variant font-body-md text-body-md mt-1">Nagaradhyaksh Executive Dashboard</p>
+</div>
+<div class="flex gap-3 w-full md:w-auto">
+<div class="relative w-full md:w-48">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">calendar_month</span>
+<select class="w-full pl-10 pr-4 py-2 bg-surface border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary appearance-none">
+<option>This Month</option>
+<option>Last Month</option>
+<option>This Quarter</option>
+<option>This Year</option>
+</select>
+</div>
+<button class="bg-surface border border-outline-variant rounded-lg p-2 text-on-surface hover:bg-surface-container-low transition-colors flex-shrink-0">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Key Metrics Bento Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-gutter mb-stack-lg">
+<div class="bg-surface border border-outline-variant rounded-xl p-4 md:p-6 flex flex-col justify-between h-32 md:h-40">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant">Total Complaints</span>
+<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">report_problem</span>
+</div>
+</div>
+<div>
+<div class="font-display-lg text-[32px] md:text-[40px] text-on-surface leading-none">1,248</div>
+<div class="flex items-center text-secondary font-label-sm text-label-sm mt-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+<span>12% from last mo</span>
+</div>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-4 md:p-6 flex flex-col justify-between h-32 md:h-40">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant">Resolved</span>
+<div class="w-8 h-8 rounded-full bg-[#d0ecd4] flex items-center justify-center text-[#146c2e]">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</div>
+</div>
+<div>
+<div class="font-display-lg text-[32px] md:text-[40px] text-on-surface leading-none">982</div>
+<div class="flex items-center text-[#146c2e] font-label-sm text-label-sm mt-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+<span>8% from last mo</span>
+</div>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-4 md:p-6 flex flex-col justify-between h-32 md:h-40">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant">Resolution Rate</span>
+<div class="w-8 h-8 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">percent</span>
+</div>
+</div>
+<div>
+<div class="font-display-lg text-[32px] md:text-[40px] text-on-surface leading-none">78.6%</div>
+<div class="flex items-center text-error font-label-sm text-label-sm mt-1">
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span>
+<span>2% from last mo</span>
+</div>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-4 md:p-6 flex flex-col justify-between h-32 md:h-40">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant">Avg. Time</span>
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+</div>
+</div>
+<div>
+<div class="font-display-lg text-[32px] md:text-[40px] text-on-surface leading-none">4.2<span class="text-[18px] text-on-surface-variant ml-1 font-body-md">days</span></div>
+<div class="flex items-center text-[#146c2e] font-label-sm text-label-sm mt-1">
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span>
+<span>0.5 days from last mo</span>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-stack-lg">
+<!-- Ward Heatmap Proxy -->
+<div class="lg:col-span-2 bg-surface border border-outline-variant rounded-xl p-6 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-title-md text-title-md text-on-surface">Ward-wise Volume</h3>
+<button class="text-primary font-label-md text-label-md hover:underline">View Map</button>
+</div>
+<div class="flex-1 min-h-[300px] bg-surface-container-low rounded-lg flex items-end justify-around p-4 gap-2 border border-outline-variant/50">
+<!-- Simulated Bar Chart -->
+<div class="w-full flex flex-col items-center gap-2 group">
+<div class="w-full bg-error-container/80 rounded-t-sm transition-all duration-300 group-hover:bg-error-container" style="height: 85%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">W1</span>
+</div>
+<div class="w-full flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary-container/30 rounded-t-sm transition-all duration-300 group-hover:bg-primary-container/40" style="height: 40%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">W2</span>
+</div>
+<div class="w-full flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary-container/60 rounded-t-sm transition-all duration-300 group-hover:bg-primary-container/70" style="height: 65%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">W3</span>
+</div>
+<div class="w-full flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary-container/20 rounded-t-sm transition-all duration-300 group-hover:bg-primary-container/30" style="height: 25%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">W4</span>
+</div>
+<div class="w-full flex flex-col items-center gap-2 group">
+<div class="w-full bg-tertiary-fixed rounded-t-sm transition-all duration-300 group-hover:bg-tertiary-fixed/80" style="height: 70%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">W5</span>
+</div>
+<div class="w-full flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary-container/40 rounded-t-sm transition-all duration-300 group-hover:bg-primary-container/50" style="height: 45%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">W6</span>
+</div>
+<div class="w-full flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary-container/10 rounded-t-sm transition-all duration-300 group-hover:bg-primary-container/20" style="height: 15%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">W7</span>
+</div>
+</div>
+</div>
+<!-- Category Trends -->
+<div class="bg-surface border border-outline-variant rounded-xl p-6 flex flex-col">
+<h3 class="font-title-md text-title-md text-on-surface mb-6">Category Trends</h3>
+<div class="space-y-6 flex-1">
+<div>
+<div class="flex justify-between items-center mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">water_drop</span>
+<span class="font-label-md text-label-md text-on-surface">Water Supply</span>
+</div>
+<span class="font-label-sm text-label-sm text-error flex items-center"><span class="material-symbols-outlined text-[14px]">trending_up</span> 42%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-secondary h-2 rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[18px]">delete</span>
+<span class="font-label-md text-label-md text-on-surface">Solid Waste</span>
+</div>
+<span class="font-label-sm text-label-sm text-[#146c2e] flex items-center"><span class="material-symbols-outlined text-[14px]">trending_down</span> 12%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-tertiary h-2 rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">lightbulb</span>
+<span class="font-label-md text-label-md text-on-surface">Street Lights</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center"><span class="material-symbols-outlined text-[14px]">trending_flat</span> 2%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 30%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]">add_road</span>
+<span class="font-label-md text-label-md text-on-surface">Roads</span>
+</div>
+<span class="font-label-sm text-label-sm text-error flex items-center"><span class="material-symbols-outlined text-[14px]">trending_up</span> 18%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-outline h-2 rounded-full" style="width: 55%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent High Priority -->
+<div class="bg-surface border border-outline-variant rounded-xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-title-md text-title-md text-on-surface">High Priority Escalations</h3>
+<button class="text-primary font-label-md text-label-md hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
+<th class="py-3 px-6 font-medium">ID</th>
+<th class="py-3 px-6 font-medium">Category</th>
+<th class="py-3 px-6 font-medium">Ward</th>
+<th class="py-3 px-6 font-medium">Status</th>
+<th class="py-3 px-6 font-medium">Days Open</th>
+<th class="py-3 px-6 font-medium text-right">Action</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface">
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-lowest transition-colors">
+<td class="py-4 px-6 font-label-md text-label-md">#CMP-8492</td>
+<td class="py-4 px-6">Major Pipeline Burst</td>
+<td class="py-4 px-6">Ward 1</td>
+<td class="py-4 px-6">
+<span class="px-3 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm">Critical</span>
+</td>
+<td class="py-4 px-6 text-error font-medium">4 Days</td>
+<td class="py-4 px-6 text-right">
+<button class="text-primary hover:text-primary-fixed-variant font-label-md text-label-md">Intervene</button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-lowest transition-colors">
+<td class="py-4 px-6 font-label-md text-label-md">#CMP-8501</td>
+<td class="py-4 px-6">Garbage Dump Overflow</td>
+<td class="py-4 px-6">Ward 5</td>
+<td class="py-4 px-6">
+<span class="px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm">High</span>
+</td>
+<td class="py-4 px-6">3 Days</td>
+<td class="py-4 px-6 text-right">
+<button class="text-primary hover:text-primary-fixed-variant font-label-md text-label-md">Intervene</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="py-4 px-6 font-label-md text-label-md">#CMP-8512</td>
+<td class="py-4 px-6">Transformer Failure</td>
+<td class="py-4 px-6">Ward 2</td>
+<td class="py-4 px-6">
+<span class="px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm">High</span>
+</td>
+<td class="py-4 px-6">2 Days</td>
+<td class="py-4 px-6 text-right">
+<button class="text-primary hover:text-primary-fixed-variant font-label-md text-label-md">Intervene</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</div>
+</body></html>

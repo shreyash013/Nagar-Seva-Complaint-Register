@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Officer Task Management - Shirol Nagar Parishad</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Sans+Marathi:wght@400;500;600;700&amp;family=Public+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error-container": "#ffdad6",
+                      "primary-container": "#004a99",
+                      "surface-container": "#e5eeff",
+                      "on-surface": "#0b1c30",
+                      "on-secondary": "#ffffff",
+                      "on-background": "#0b1c30",
+                      "on-secondary-fixed-variant": "#1f477b",
+                      "on-surface-variant": "#424751",
+                      "outline": "#737783",
+                      "secondary-fixed-dim": "#a7c8ff",
+                      "tertiary-container": "#833301",
+                      "on-error-container": "#93000a",
+                      "background": "#f8f9ff",
+                      "primary-fixed-dim": "#abc7ff",
+                      "outline-variant": "#c2c6d3",
+                      "tertiary-fixed": "#ffdbcc",
+                      "surface-container-low": "#eff4ff",
+                      "secondary-container": "#9fc2fe",
+                      "on-primary-container": "#9bbdff",
+                      "error": "#ba1a1a",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-primary": "#abc7ff",
+                      "primary": "#00346f",
+                      "secondary": "#3a5f94",
+                      "surface": "#f8f9ff",
+                      "surface-bright": "#f8f9ff",
+                      "surface-variant": "#d3e4fe",
+                      "on-error": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "on-primary-fixed": "#001b3f",
+                      "on-secondary-fixed": "#001b3c",
+                      "on-secondary-container": "#294f83",
+                      "tertiary": "#5f2200",
+                      "surface-dim": "#cbdbf5",
+                      "tertiary-fixed-dim": "#ffb694",
+                      "surface-tint": "#255dad",
+                      "on-tertiary-container": "#ffa77e",
+                      "primary-fixed": "#d7e2ff",
+                      "inverse-surface": "#213145",
+                      "surface-container-highest": "#d3e4fe",
+                      "secondary-fixed": "#d5e3ff",
+                      "on-tertiary-fixed": "#351000",
+                      "on-tertiary-fixed-variant": "#7b2f00",
+                      "on-primary-fixed-variant": "#00458f",
+                      "surface-container-high": "#dce9ff",
+                      "on-tertiary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "container-max": "1280px",
+                      "stack-md": "24px",
+                      "margin-mobile": "16px",
+                      "stack-lg": "48px",
+                      "stack-sm": "12px",
+                      "margin-desktop": "48px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "title-md": [
+                              "Public Sans",
+                              "Noto Sans Marathi",
+                              "sans-serif"
+                      ],
+                      "display-lg": [
+                              "Public Sans",
+                              "Noto Sans Marathi",
+                              "sans-serif"
+                      ],
+                      "headline-lg-mobile": [
+                              "Public Sans",
+                              "Noto Sans Marathi",
+                              "sans-serif"
+                      ],
+                      "body-lg": [
+                              "Inter",
+                              "Noto Sans Marathi",
+                              "sans-serif"
+                      ],
+                      "headline-lg": [
+                              "Public Sans",
+                              "Noto Sans Marathi",
+                              "sans-serif"
+                      ],
+                      "body-md": [
+                              "Inter",
+                              "Noto Sans Marathi",
+                              "sans-serif"
+                      ],
+                      "label-sm": [
+                              "Inter",
+                              "Noto Sans Marathi",
+                              "sans-serif"
+                      ],
+                      "label-md": [
+                              "Inter",
+                              "Noto Sans Marathi",
+                              "sans-serif"
+                      ]
+              },
+              "fontSize": {
+                      "title-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "60px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md">
+<!-- TopAppBar -->
+<header class="bg-surface border-b border-outline-variant flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 max-w-container-max mx-auto docked full-width top-0 sticky z-40">
+<div class="flex items-center gap-gutter">
+<h1 class="font-title-md text-title-md font-bold text-primary">Smart Nagar Parishad Shirol</h1>
+<nav class="hidden md:flex gap-stack-md">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors px-2 py-1 rounded" href="#">Dashboard</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors px-2 py-1 rounded" href="#">Services</a>
+<a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="#">Complaints</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors px-2 py-1 rounded" href="#">Ward Info</a>
+</nav>
+</div>
+<div class="flex items-center gap-stack-sm">
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-1 rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-outline-variant" data-alt="A small circular profile picture of a professional individual against a light, neutral background, suitable for a corporate dashboard user avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXKZLXSunvGIfEsWq1nMIjajnpij5tl0qSaezf2T17AIWd7OMo_oU5doiLaCcdk5h_fYEXFkp6_xmj-q-gDVNWqKjPoVekv9ZOQG7eZQdZKdfYYOpOABFCRFQJm1yPJFmcdUgnJTddZdFCN_KkzRoOV6oQirSHkXNcrDqt1FV3u8aCzw7hrmFW5-vXPNSiKJNBNw6rpWkbKvR7O9EBvuWKsnp4uovtuOL4reU5eutlN892XgLNt8oovpC7VMo7G3wCCZ8DTObjh_jX"/>
+</button>
+</div>
+</header>
+<div class="flex flex-1 max-w-container-max mx-auto w-full">
+<!-- SideNavBar (Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col py-4 h-full min-h-[calc(100vh-4rem)] w-64 border-r border-outline-variant bg-surface-container-low sticky top-16 shadow-sm">
+<div class="px-gutter mb-stack-md flex items-center gap-stack-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-primary">Admin Panel</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Shirol Nagar Parishad</p>
+</div>
+</div>
+<div class="px-gutter mb-stack-md">
+<button class="w-full bg-primary text-on-primary py-2 px-4 rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-on-primary-fixed-variant transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    New Notice
+                </button>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<a class="flex items-center gap-stack-sm py-3 px-4 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 transition-colors hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Overview
+                </a>
+<a class="flex items-center gap-stack-sm py-3 px-4 font-label-md text-label-md bg-secondary-container text-on-secondary-container rounded-lg mx-2 transition-transform scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+                    All Complaints
+                </a>
+<a class="flex items-center gap-stack-sm py-3 px-4 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 transition-colors hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+                    Ward Analytics
+                </a>
+<a class="flex items-center gap-stack-sm py-3 px-4 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 transition-colors hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+                    Department Performance
+                </a>
+<a class="flex items-center gap-stack-sm py-3 px-4 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 transition-colors hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+                    Reports
+                </a>
+</nav>
+<div class="mt-auto px-2 space-y-1 pb-4">
+<a class="flex items-center gap-stack-sm py-2 px-4 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 transition-colors hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Settings
+                </a>
+<a class="flex items-center gap-stack-sm py-2 px-4 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 transition-colors hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                    Help Center
+                </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-margin-mobile md:p-margin-desktop pb-24 md:pb-margin-desktop overflow-y-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-stack-lg gap-stack-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">My Assigned Complaints</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage and update status for tasks assigned to you.</p>
+</div>
+<!-- Filters & Sort -->
+<div class="flex flex-wrap gap-stack-sm w-full md:w-auto">
+<div class="relative group">
+<select class="appearance-none bg-surface border border-outline-variant text-on-surface py-2 pl-4 pr-10 rounded-lg font-label-md text-label-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-full md:w-auto hover:bg-surface-container-low transition-colors">
+<option>Sort by Priority</option>
+<option>High to Low</option>
+<option>Low to High</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none" data-icon="sort">sort</span>
+</div>
+<div class="relative group">
+<select class="appearance-none bg-surface border border-outline-variant text-on-surface py-2 pl-4 pr-10 rounded-lg font-label-md text-label-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-full md:w-auto hover:bg-surface-container-low transition-colors">
+<option>Category: All</option>
+<option>Water Supply</option>
+<option>Sanitation</option>
+<option>Roads</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none" data-icon="filter_list">filter_list</span>
+</div>
+</div>
+</div>
+<!-- Task List Container -->
+<div class="space-y-stack-md">
+<!-- Complaint Card 1 - High Priority -->
+<div class="bg-surface border border-error-container rounded-xl p-stack-md hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1.5 h-full bg-error"></div>
+<div class="flex flex-col lg:flex-row gap-stack-md justify-between">
+<!-- Left Details -->
+<div class="flex-1 space-y-3">
+<div class="flex items-center gap-stack-sm flex-wrap">
+<span class="bg-error-container text-on-error-container px-3 py-1 rounded-full font-label-sm text-label-sm uppercase tracking-wider font-bold">High Priority</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Ticket ID: #SNP-2024-089</span>
+<span class="text-on-surface-variant">•</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Ward 4</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface">Major Water Pipeline Leakage</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 max-w-3xl">
+                                Significant water leakage reported near the main square leading to waterlogging. Immediate attention required to prevent further damage to the newly constructed road and water wastage.
+                            </p>
+<div class="flex items-center gap-4 pt-2">
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+                                    Reported: Oct 24, 2024
+                                </div>
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="category">category</span>
+                                    Water Supply
+                                </div>
+</div>
+</div>
+<!-- Right Actions -->
+<div class="flex flex-col sm:flex-row lg:flex-col gap-stack-sm lg:w-48 shrink-0 justify-between">
+<div class="space-y-2 w-full">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Current Status</p>
+<div class="flex rounded-lg border border-outline-variant overflow-hidden w-full">
+<button class="flex-1 py-1.5 bg-secondary-container text-on-secondary-container font-label-sm text-label-sm border-r border-outline-variant hover:bg-primary-fixed transition-colors">In Progress</button>
+<button class="flex-1 py-1.5 bg-surface text-on-surface font-label-sm text-label-sm hover:bg-surface-container-low transition-colors">Resolved</button>
+</div>
+</div>
+<div class="flex gap-2 w-full mt-auto">
+<button class="flex-1 border border-outline text-primary font-label-md text-label-md py-2 px-3 rounded-lg hover:bg-surface-container-low transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit_note">edit_note</span>
+                                    Add Note
+                                </button>
+<button class="flex-1 bg-primary text-on-primary font-label-md text-label-md py-2 px-3 rounded-lg hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="update">update</span>
+                                    Update
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Complaint Card 2 - Medium Priority -->
+<div class="bg-surface border border-outline-variant rounded-xl p-stack-md hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1.5 h-full bg-tertiary-container"></div>
+<div class="flex flex-col lg:flex-row gap-stack-md justify-between">
+<!-- Left Details -->
+<div class="flex-1 space-y-3">
+<div class="flex items-center gap-stack-sm flex-wrap">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full font-label-sm text-label-sm uppercase tracking-wider font-bold">Medium Priority</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Ticket ID: #SNP-2024-072</span>
+<span class="text-on-surface-variant">•</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Ward 12</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface">Streetlights not functioning on MG Road</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 max-w-3xl">
+                                Several consecutive streetlights are out on the stretch near the municipal park. Creating safety concerns for pedestrians during evening hours.
+                            </p>
+<div class="flex items-center gap-4 pt-2">
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+                                    Reported: Oct 22, 2024
+                                </div>
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="category">category</span>
+                                    Electrical
+                                </div>
+</div>
+</div>
+<!-- Right Actions -->
+<div class="flex flex-col sm:flex-row lg:flex-col gap-stack-sm lg:w-48 shrink-0 justify-between">
+<div class="space-y-2 w-full">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Current Status</p>
+<div class="flex rounded-lg border border-outline-variant overflow-hidden w-full">
+<button class="flex-1 py-1.5 bg-surface text-on-surface font-label-sm text-label-sm border-r border-outline-variant hover:bg-surface-container-low transition-colors">In Progress</button>
+<button class="flex-1 py-1.5 bg-surface text-on-surface font-label-sm text-label-sm hover:bg-surface-container-low transition-colors">Resolved</button>
+</div>
+</div>
+<div class="flex gap-2 w-full mt-auto">
+<button class="flex-1 border border-outline text-primary font-label-md text-label-md py-2 px-3 rounded-lg hover:bg-surface-container-low transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit_note">edit_note</span>
+                                    Add Note
+                                </button>
+<button class="flex-1 bg-primary text-on-primary font-label-md text-label-md py-2 px-3 rounded-lg hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="update">update</span>
+                                    Update
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination Placeholder -->
+<div class="mt-stack-lg flex justify-center items-center gap-2">
+<button class="p-2 rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-low transition-colors disabled:opacity-50"><span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span></button>
+<span class="px-4 py-2 font-label-md text-label-md bg-secondary-container text-on-secondary-container rounded-lg">1</span>
+<span class="px-4 py-2 font-label-md text-label-md text-on-surface hover:bg-surface-container-low rounded-lg cursor-pointer">2</span>
+<span class="px-4 py-2 font-label-md text-label-md text-on-surface hover:bg-surface-container-low rounded-lg cursor-pointer">3</span>
+<button class="p-2 rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface border-t border-outline-variant shadow-lg md:hidden rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 w-16" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 w-16" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="add_circle">add_circle</span>
+<span class="font-label-sm text-label-sm">Submit</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-4 py-1 w-20 active:bg-surface-container-highest active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="list_alt" data-weight="fill" style="font-variation-settings: 'FILL' 1;">list_alt</span>
+<span class="font-label-sm text-label-sm">Tasks</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 w-16" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+</body></html>

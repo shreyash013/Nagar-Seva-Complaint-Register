@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Tracking - Smart Nagar Parishad Shirol</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Sans+Marathi:wght@400;500;600;700&amp;family=Public+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "primary-container": "#004a99",
+                        "surface-container": "#e5eeff",
+                        "on-surface": "#0b1c30",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#0b1c30",
+                        "on-secondary-fixed-variant": "#1f477b",
+                        "on-surface-variant": "#424751",
+                        "outline": "#737783",
+                        "secondary-fixed-dim": "#a7c8ff",
+                        "tertiary-container": "#833301",
+                        "on-error-container": "#93000a",
+                        "background": "#f8f9ff",
+                        "primary-fixed-dim": "#abc7ff",
+                        "outline-variant": "#c2c6d3",
+                        "tertiary-fixed": "#ffdbcc",
+                        "surface-container-low": "#eff4ff",
+                        "secondary-container": "#9fc2fe",
+                        "on-primary-container": "#9bbdff",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#abc7ff",
+                        "primary": "#00346f",
+                        "secondary": "#3a5f94",
+                        "surface": "#f8f9ff",
+                        "surface-bright": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-primary-fixed": "#001b3f",
+                        "on-secondary-fixed": "#001b3c",
+                        "on-secondary-container": "#294f83",
+                        "tertiary": "#5f2200",
+                        "surface-dim": "#cbdbf5",
+                        "tertiary-fixed-dim": "#ffb694",
+                        "surface-tint": "#255dad",
+                        "on-tertiary-container": "#ffa77e",
+                        "primary-fixed": "#d7e2ff",
+                        "inverse-surface": "#213145",
+                        "surface-container-highest": "#d3e4fe",
+                        "secondary-fixed": "#d5e3ff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "on-primary-fixed-variant": "#00458f",
+                        "surface-container-high": "#dce9ff",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "stack-md": "24px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "48px",
+                        "stack-sm": "12px",
+                        "margin-desktop": "48px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Public Sans", "Noto Sans Marathi", "sans-serif"],
+                        "display-lg": ["Public Sans", "Noto Sans Marathi", "sans-serif"],
+                        "headline-lg-mobile": ["Public Sans", "Noto Sans Marathi", "sans-serif"],
+                        "body-lg": ["Inter", "Noto Sans Marathi", "sans-serif"],
+                        "headline-lg": ["Public Sans", "Noto Sans Marathi", "sans-serif"],
+                        "body-md": ["Inter", "Noto Sans Marathi", "sans-serif"],
+                        "label-sm": ["Inter", "Noto Sans Marathi", "sans-serif"],
+                        "label-md": ["Inter", "Noto Sans Marathi", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col pb-20 md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flat no shadows docked full-width top-0 z-40 hidden md:block">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<span class="font-title-md text-title-md font-bold text-primary dark:text-primary-fixed-dim">Smart Nagar Parishad Shirol</span>
+</div>
+<nav class="hidden lg:flex items-center gap-6">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors px-3 py-2 rounded-md" href="#">Dashboard</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors px-3 py-2 rounded-md" href="#">Services</a>
+<a class="font-label-md text-label-md text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim pb-1 px-3 py-2 opacity-80 duration-150" href="#">Complaints</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors px-3 py-2 rounded-md" href="#">Ward Info</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Layout -->
+<div class="flex-1 flex max-w-container-max mx-auto w-full">
+<!-- Canvas -->
+<main class="flex-1 w-full px-margin-mobile md:px-margin-desktop py-stack-md flex flex-col gap-stack-lg">
+<!-- Page Header -->
+<div class="flex flex-col gap-2">
+<h1 class="font-headline-lg text-headline-lg text-on-background">My Tracking</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">View and track the status of your submitted complaints and requests.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter items-start">
+<!-- Left Column: Active Tracking (Bento-style featured card) -->
+<div class="lg:col-span-2 flex flex-col gap-stack-md">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col gap-stack-md">
+<div class="flex justify-between items-start border-b border-outline-variant pb-4">
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">αñ╕αñòαÑìαñ░αñ┐αñ» αññαñ┐αñòαÑÇαñƒ</span>
+<h2 class="font-title-md text-title-md text-on-surface">Streetlight Malfunction - Ward 4</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Ticket ID: #SNP-2023-0892</p>
+</div>
+<span class="inline-flex items-center px-3 py-1 rounded-full font-label-sm text-label-sm bg-primary-container text-on-primary-container">
+                                αñ¬αÑìαñ░αñùαññαÑÇαñ¬αñÑαñ╛αñ╡αñ░
+                            </span>
+</div>
+<!-- Timeline -->
+<div class="py-4 pl-4 border-l-2 border-outline-variant ml-4 flex flex-col gap-8 relative">
+<!-- Timeline Item 1 (Done) -->
+<div class="relative">
+<div class="absolute -left-[27px] top-0 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px] text-on-primary" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface">αññαñòαÑìαñ░αñ╛αñ░ αñªαñ╛αñûαñ▓</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">12 Oct 2023, 09:30 AM</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 bg-surface-container-low p-3 rounded-md">Reported non-functioning streetlight near Main Market square.</p>
+</div>
+</div>
+<!-- Timeline Item 2 (Done) -->
+<div class="relative">
+<div class="absolute -left-[27px] top-0 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px] text-on-primary" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface">αñ╡αñ┐αñ¡αñ╛αñùαñ╛αñòαñíαÑç αñ╕αÑüαñ¬αÑéαñ░αÑìαñª</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">13 Oct 2023, 11:15 AM</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 bg-surface-container-low p-3 rounded-md">Forwarded to Electrical Maintenance Dept. Assignee: Ramesh K.</p>
+</div>
+</div>
+<!-- Timeline Item 3 (Current) -->
+<div class="relative">
+<div class="absolute -left-[27px] top-0 w-5 h-5 rounded-full bg-surface-container-lowest border-2 border-primary flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-primary font-bold">αñ¬αÑìαñ░αñùαññαÑÇαñ¬αñÑαñ╛αñ╡αñ░</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">14 Oct 2023, 02:45 PM</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 bg-surface-container-low p-3 rounded-md border border-primary-container/30">Technician dispatched for inspection. Parts ordered for replacement.</p>
+</div>
+</div>
+<!-- Timeline Item 4 (Pending) -->
+<div class="relative opacity-50">
+<div class="absolute -left-[27px] top-0 w-5 h-5 rounded-full bg-surface-container-lowest border-2 border-outline-variant flex items-center justify-center">
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface-variant">αñ¿αñ┐αñ░αñ╛αñòαñ░αñú αñ¥αñ╛αñ▓αÑç</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">αñ¬αÑìαñ░αñ▓αñéαñ¼αñ┐αññ</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex gap-4 mt-4 pt-4 border-t border-outline-variant">
+<button class="px-6 py-2 bg-primary text-on-primary font-label-md text-label-md rounded-md hover:bg-primary/90 transition-colors">Add Note</button>
+<button class="px-6 py-2 border border-outline text-on-surface font-label-md text-label-md rounded-md hover:bg-surface-container-low transition-colors">Contact Support</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Past Complaints List -->
+<div class="lg:col-span-1 flex flex-col gap-stack-md">
+<h3 class="font-title-md text-title-md text-on-surface">Recent History</h3>
+<div class="flex flex-col gap-4">
+<!-- History Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:shadow-sm transition-shadow cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">#SNP-2023-0711</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-[#e8f5e9] text-[#1b5e20] dark:bg-[#1b5e20]/20 dark:text-[#a5d6a7]">
+                                    αñ¿αñ┐αñ░αñ╛αñòαñ░αñú αñ¥αñ╛αñ▓αÑç
+                                </span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface mb-1">αñ¬αñ╛αñúαÑÇαñ¬αÑüαñ░αñ╡αñáαñ╛ αñûαñéαñíαñ┐αññ</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mb-3">Reported irregular supply in Shivaji Nagar.</p>
+<div class="flex justify-between items-center pt-3 border-t border-outline-variant">
+<span class="font-label-sm text-label-sm text-on-surface-variant">28 Sep 2023</span>
+<button class="text-primary font-label-md text-label-md hover:underline">Provide Feedback</button>
+</div>
+</div>
+<!-- History Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:shadow-sm transition-shadow cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">#SNP-2023-0654</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-[#fff8e1] text-[#f57f17] dark:bg-[#f57f17]/20 dark:text-[#ffe082]">
+                                    αñ¬αÑìαñ░αñ▓αñéαñ¼αñ┐αññ
+                                </span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface mb-1">αñòαñÜαñ░αñ╛ αñ╕αñéαñòαñ▓αñ¿ αñ╡αñ┐αñ¿αñéαññαÑÇ</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mb-3">Missed collection for 2 days at Lane 3.</p>
+<div class="flex justify-between items-center pt-3 border-t border-outline-variant">
+<span class="font-label-sm text-label-sm text-on-surface-variant">15 Sep 2023</span>
+<button class="text-primary font-label-md text-label-md hover:underline">Reopen</button>
+</div>
+</div>
+<!-- History Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 hover:shadow-sm transition-shadow cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">#SNP-2023-0420</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-[#e8f5e9] text-[#1b5e20] dark:bg-[#1b5e20]/20 dark:text-[#a5d6a7]">
+                                    αñ¿αñ┐αñ░αñ╛αñòαñ░αñú αñ¥αñ╛αñ▓αÑç
+                                </span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface mb-1">αñûαñíαÑìαñíαÑç αñªαÑüαñ░αÑüαñ╕αÑìαññαÑÇ</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mb-3">Deep pothole near municipal school gate.</p>
+<div class="flex justify-between items-center pt-3 border-t border-outline-variant">
+<span class="font-label-sm text-label-sm text-on-surface-variant">02 Aug 2023</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">star</span> Rated 4/5</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2 mt-2 text-primary font-label-md text-label-md border border-primary rounded-md hover:bg-primary/5 transition-colors">View All History</button>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar -->
+<nav class="bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 md:hidden shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">add_circle</span>
+<span class="font-label-sm text-label-sm">Submit</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim bg-primary-container/20 rounded-xl px-4 py-1 scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label-sm text-label-sm">My Tracking</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<!-- Footer (Hidden on mobile to avoid clashing with bottom nav) -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant dark:border-outline w-full py-8 px-margin-mobile md:px-margin-desktop mt-auto hidden md:block">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-body-md text-body-md text-on-surface dark:text-inverse-on-surface">┬⌐ 2024 Shirol Municipal Council. All rights reserved. Government of Maharashtra.</p>
+<div class="flex gap-4 flex-wrap">
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface hover:underline" href="#">Public Notices</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface hover:underline" href="#">Ward Map</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface hover:underline" href="#">Contact Us</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface hover:underline" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-inverse-on-surface hover:underline" href="#">Right to Information</a>
+</div>
+</div>
+</footer>
+</body></html>

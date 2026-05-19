@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Complaint Submission Portal - Smart Nagar Parishad Shirol</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Marathi:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error-container": "#ffdad6",
+                      "primary-container": "#004a99",
+                      "surface-container": "#e5eeff",
+                      "on-surface": "#0b1c30",
+                      "on-secondary": "#ffffff",
+                      "on-background": "#0b1c30",
+                      "on-secondary-fixed-variant": "#1f477b",
+                      "on-surface-variant": "#424751",
+                      "outline": "#737783",
+                      "secondary-fixed-dim": "#a7c8ff",
+                      "tertiary-container": "#833301",
+                      "on-error-container": "#93000a",
+                      "background": "#f8f9ff",
+                      "primary-fixed-dim": "#abc7ff",
+                      "outline-variant": "#c2c6d3",
+                      "tertiary-fixed": "#ffdbcc",
+                      "surface-container-low": "#eff4ff",
+                      "secondary-container": "#9fc2fe",
+                      "on-primary-container": "#9bbdff",
+                      "error": "#ba1a1a",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-primary": "#abc7ff",
+                      "primary": "#00346f",
+                      "secondary": "#3a5f94",
+                      "surface": "#f8f9ff",
+                      "surface-bright": "#f8f9ff",
+                      "surface-variant": "#d3e4fe",
+                      "on-error": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "on-primary-fixed": "#001b3f",
+                      "on-secondary-fixed": "#001b3c",
+                      "on-secondary-container": "#294f83",
+                      "tertiary": "#5f2200",
+                      "surface-dim": "#cbdbf5",
+                      "tertiary-fixed-dim": "#ffb694",
+                      "surface-tint": "#255dad",
+                      "on-tertiary-container": "#ffa77e",
+                      "primary-fixed": "#d7e2ff",
+                      "inverse-surface": "#213145",
+                      "surface-container-highest": "#d3e4fe",
+                      "secondary-fixed": "#d5e3ff",
+                      "on-tertiary-fixed": "#351000",
+                      "on-tertiary-fixed-variant": "#7b2f00",
+                      "on-primary-fixed-variant": "#00458f",
+                      "surface-container-high": "#dce9ff",
+                      "on-tertiary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "container-max": "1280px",
+                      "stack-md": "24px",
+                      "margin-mobile": "16px",
+                      "stack-lg": "48px",
+                      "stack-sm": "12px",
+                      "margin-desktop": "48px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "title-md": [
+                              "Public Sans"
+                      ],
+                      "display-lg": [
+                              "Public Sans"
+                      ],
+                      "headline-lg-mobile": [
+                              "Public Sans"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Public Sans"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "marathi": [
+                              "Noto Sans Marathi",
+                              "sans-serif"
+                      ]
+              },
+              "fontSize": {
+                      "title-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "60px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md text-body-md">
+<!-- TopAppBar -->
+<header class="bg-surface docked full-width top-0 border-b border-outline-variant flat no shadows">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<span class="font-title-md text-title-md font-bold text-primary">Smart Nagar Parishad Shirol</span>
+</div>
+<nav class="hidden md:flex gap-6 h-full">
+<a class="h-full flex flex-col justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors px-4 font-label-md text-label-md" href="#">Dashboard</a>
+<a class="h-full flex flex-col justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors px-4 font-label-md text-label-md" href="#">Services</a>
+<a class="h-full flex flex-col justify-center text-primary border-b-2 border-primary pb-1 hover:bg-surface-container-low transition-colors px-4 font-label-md text-label-md" href="#">Complaints</a>
+<a class="h-full flex flex-col justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors px-4 font-label-md text-label-md" href="#">Ward Info</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-md md:py-stack-lg mb-20 md:mb-0">
+<div class="mb-stack-md flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Submit a Complaint</h1>
+<p class="text-on-surface-variant font-body-md text-body-md">Please provide details about the issue you are facing.</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Language:</span>
+<button class="font-label-md text-label-md bg-surface-container-low text-primary px-3 py-1 rounded-full border border-outline-variant hover:bg-surface-container transition-colors font-marathi">English / αñ«αñ░αñ╛αñáαÑÇ</button>
+</div>
+</div>
+<!-- Form Bento Grid Layout -->
+<form class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Column: Details -->
+<div class="md:col-span-8 flex flex-col gap-stack-md">
+<!-- Category Section -->
+<section class="bg-surface rounded-xl border border-outline-variant p-6">
+<h2 class="font-title-md text-title-md text-on-surface mb-4">1. Select Category <span class="text-on-surface-variant font-body-md text-body-md ml-2 font-marathi">αñ╡αñ░αÑìαñù αñ¿αñ┐αñ╡αñíαñ╛</span></h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4"><label class="cursor-pointer relative">
+<input checked="" class="peer sr-only" name="category" type="radio" value="water"/>
+<div class="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-lg bg-surface peer-checked:bg-surface-container-high peer-checked:border-primary peer-checked:shadow-sm transition-all hover:bg-surface-container-low h-full">
+<span class="material-symbols-outlined text-primary mb-2" style="font-size: 32px;">water_drop</span>
+<span class="font-label-md text-label-md text-on-surface text-center">Water Supply<br/><span class="text-xs text-on-surface-variant font-marathi">αñ¬αñ╛αñúαÑÇαñ¬αÑüαñ░αñ╡αñáαñ╛</span></span>
+</div>
+</label>
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="category" type="radio" value="garbage"/>
+<div class="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-lg bg-surface peer-checked:bg-surface-container-high peer-checked:border-primary peer-checked:shadow-sm transition-all hover:bg-surface-container-low h-full">
+<span class="material-symbols-outlined text-primary mb-2" style="font-size: 32px;">delete</span>
+<span class="font-label-md text-label-md text-on-surface text-center">Garbage<br/><span class="text-xs text-on-surface-variant font-marathi">αñòαñÜαñ░αñ╛</span></span>
+</div>
+</label>
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="category" type="radio" value="roads"/>
+<div class="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-lg bg-surface peer-checked:bg-surface-container-high peer-checked:border-primary peer-checked:shadow-sm transition-all hover:bg-surface-container-low h-full">
+<span class="material-symbols-outlined text-primary mb-2" style="font-size: 32px;">add_road</span>
+<span class="font-label-md text-label-md text-on-surface text-center">Roads<br/><span class="text-xs text-on-surface-variant font-marathi">αñ░αñ╕αÑìαññαÑç</span></span>
+</div>
+</label>
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="category" type="radio" value="streetlights"/>
+<div class="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-lg bg-surface peer-checked:bg-surface-container-high peer-checked:border-primary peer-checked:shadow-sm transition-all hover:bg-surface-container-low h-full">
+<span class="material-symbols-outlined text-primary mb-2" style="font-size: 32px;">lightbulb</span>
+<span class="font-label-md text-label-md text-on-surface text-center">Streetlights<br/><span class="text-xs text-on-surface-variant font-marathi">αñ░αñ╕αÑìαññαÑìαñ»αñ╛αñ╡αñ░αÑÇαñ▓ αñªαñ┐αñ╡αÑç</span></span>
+</div>
+</label>
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="category" type="radio" value="stray_animals"/>
+<div class="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-lg bg-surface peer-checked:bg-surface-container-high peer-checked:border-primary peer-checked:shadow-sm transition-all hover:bg-surface-container-low h-full">
+<span class="material-symbols-outlined text-primary mb-2" style="font-size: 32px;">pets</span>
+<span class="font-label-md text-label-md text-on-surface text-center">Stray Animals<br/><span class="text-xs text-on-surface-variant font-marathi">αñ¡αñƒαñòαÑÇ αñ£αñ¿αñ╛αñ╡αñ░αÑç</span></span>
+</div>
+</label>
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="category" type="radio" value="tree_trimming"/>
+<div class="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-lg bg-surface peer-checked:bg-surface-container-high peer-checked:border-primary peer-checked:shadow-sm transition-all hover:bg-surface-container-low h-full">
+<span class="material-symbols-outlined text-primary mb-2" style="font-size: 32px;">nature_people</span>
+<span class="font-label-md text-label-md text-on-surface text-center">Tree Trimming<br/><span class="text-xs text-on-surface-variant font-marathi">αñ¥αñ╛αñíαñ╛αñéαñÜαÑÇ αñ¢αñ╛αñƒαñúαÑÇ</span></span>
+</div>
+</label>
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="category" type="radio" value="drainage"/>
+<div class="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-lg bg-surface peer-checked:bg-surface-container-high peer-checked:border-primary peer-checked:shadow-sm transition-all hover:bg-surface-container-low h-full">
+<span class="material-symbols-outlined text-primary mb-2" style="font-size: 32px;">waves</span>
+<span class="font-label-md text-label-md text-on-surface text-center">Drainage<br/><span class="text-xs text-on-surface-variant font-marathi">αñ╕αñ╛αñéαñíαñ¬αñ╛αñúαÑÇ</span></span>
+</div>
+</label>
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="category" type="radio" value="toilets"/>
+<div class="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-lg bg-surface peer-checked:bg-surface-container-high peer-checked:border-primary peer-checked:shadow-sm transition-all hover:bg-surface-container-low h-full">
+<span class="material-symbols-outlined text-primary mb-2" style="font-size: 32px;">wc</span>
+<span class="font-label-md text-label-md text-on-surface text-center">Public Toilets<br/><span class="text-xs text-on-surface-variant font-marathi">αñ╕αñ╛αñ░αÑìαñ╡αñ£αñ¿αñ┐αñò αñ╢αÑîαñÜαñ╛αñ▓αñ»</span></span>
+</div>
+</label>
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="category" type="radio" value="others"/>
+<div class="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-lg bg-surface peer-checked:bg-surface-container-high peer-checked:border-primary peer-checked:shadow-sm transition-all hover:bg-surface-container-low h-full">
+<span class="material-symbols-outlined text-primary mb-2" style="font-size: 32px;">more_horiz</span>
+<span class="font-label-md text-label-md text-on-surface text-center">Others<br/><span class="text-xs text-on-surface-variant font-marathi">αñçαññαñ░</span></span>
+</div>
+</label></div>
+</section>
+<!-- Location Section -->
+<section class="bg-surface rounded-xl border border-outline-variant p-6">
+<h2 class="font-title-md text-title-md text-on-surface mb-4">2. Location Details <span class="text-on-surface-variant font-body-md text-body-md ml-2 font-marathi">αñáαñ┐αñòαñ╛αñú αññαñ¬αñ╢αÑÇαñ▓</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface">Ward Number <span class="text-error">*</span></label>
+<select class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md">
+<option disabled="" selected="" value="">Select Ward</option>
+<option value="1">Ward 1 - Shivaji Chowk Area</option>
+<option value="2">Ward 2 - Market Yard</option>
+<option value="3">Ward 3 - Station Road</option>
+<option value="4">Ward 4 - Gavbhag</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface">Area / Landmark <span class="text-error">*</span></label>
+<input class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md" placeholder="Enter specific locality or landmark" type="text"/>
+</div>
+</div>
+</section>
+<!-- Description Section -->
+<section class="bg-surface rounded-xl border border-outline-variant p-6">
+<h2 class="font-title-md text-title-md text-on-surface mb-4">3. Complaint Description <span class="text-on-surface-variant font-body-md text-body-md ml-2 font-marathi">αññαñòαÑìαñ░αñ╛αñ░ αñ╡αñ░αÑìαñúαñ¿</span></h2>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface">Detailed Information <span class="text-error">*</span></label>
+<textarea class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md resize-none" placeholder="Please describe the issue in detail..." rows="4"></textarea>
+<p class="font-label-sm text-label-sm text-on-surface-variant text-right">0/500 characters</p>
+</div>
+</section>
+</div>
+<!-- Right Column: Evidence & Submit -->
+<div class="md:col-span-4 flex flex-col gap-stack-md">
+<!-- Photo Upload -->
+<section class="bg-surface rounded-xl border border-outline-variant p-6 flex-grow flex flex-col">
+<h2 class="font-title-md text-title-md text-on-surface mb-4">4. Evidence (Optional) <span class="text-on-surface-variant font-body-md text-body-md ml-2 font-marathi">αñ¬αÑüαñ░αñ╛αñ╡αñ╛</span></h2>
+<div class="border-2 border-dashed border-outline-variant rounded-xl flex-grow flex flex-col items-center justify-center p-6 bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer text-center group">
+<span class="material-symbols-outlined text-outline group-hover:text-primary mb-2" style="font-size: 48px;">cloud_upload</span>
+<p class="font-label-md text-label-md text-on-surface mb-1">Click to upload or drag and drop</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">SVG, PNG, JPG or GIF (max. 5MB)</p>
+<button class="mt-4 px-4 py-2 bg-surface text-primary border border-outline-variant rounded-lg font-label-md text-label-md hover:bg-surface-container-lowest transition-colors" type="button">Select Files</button>
+</div>
+</section>
+<!-- Actions -->
+<section class="bg-surface-container-low rounded-xl border border-outline-variant p-6">
+<div class="flex flex-col gap-4">
+<div class="flex items-start gap-2">
+<input class="mt-1 w-4 h-4 text-primary bg-surface border-outline-variant rounded focus:ring-primary focus:ring-2" id="terms" type="checkbox"/>
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="terms">I declare that the information provided is true to my knowledge.</label>
+</div>
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-label-md text-label-md flex justify-center items-center gap-2 hover:bg-on-primary-fixed-variant transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined" style="font-size: 20px;">send</span>
+                            Submit Complaint
+                        </button>
+<button class="w-full bg-transparent text-primary py-3 rounded-lg font-label-md text-label-md border border-outline-variant hover:bg-surface-container transition-colors" type="button">
+                            Save as Draft
+                        </button>
+</div>
+</section>
+</div>
+</form>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface border-t border-outline-variant md:hidden shadow-lg rounded-t-xl pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant w-16 h-14 active:bg-surface-container-highest rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-4 py-1 w-20 h-14 active:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span class="font-label-sm text-label-sm">Submit</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant w-16 h-14 active:bg-surface-container-highest rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant w-16 h-14 active:bg-surface-container-highest rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="w-full bg-surface-container-highest py-8 px-margin-mobile md:px-margin-desktop mt-auto border-t border-outline-variant flat no shadows hidden md:block">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md text-on-surface">Smart Nagar Parishad</span>
+<span class="text-on-surface-variant font-body-md text-body-md ml-4">┬⌐ 2024 Shirol Municipal Council. All rights reserved. Government of Maharashtra.</span>
+</div>
+<div class="flex flex-wrap gap-6 font-label-sm text-label-sm">
+<a class="text-on-surface-variant hover:text-on-surface hover:underline" href="#">Public Notices</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:underline" href="#">Ward Map</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:underline" href="#">Contact Us</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:underline" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:underline" href="#">Right to Information</a>
+</div>
+</div>
+</footer>
+</body></html>

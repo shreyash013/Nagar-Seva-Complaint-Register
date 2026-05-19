@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard - Smart Nagar Parishad Shirol</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Marathi:wght@400;500;600;700&amp;family=Public+Sans:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error-container": "#ffdad6",
+                      "primary-container": "#004a99",
+                      "surface-container": "#e5eeff",
+                      "on-surface": "#0b1c30",
+                      "on-secondary": "#ffffff",
+                      "on-background": "#0b1c30",
+                      "on-secondary-fixed-variant": "#1f477b",
+                      "on-surface-variant": "#424751",
+                      "outline": "#737783",
+                      "secondary-fixed-dim": "#a7c8ff",
+                      "tertiary-container": "#833301",
+                      "on-error-container": "#93000a",
+                      "background": "#f8f9ff",
+                      "primary-fixed-dim": "#abc7ff",
+                      "outline-variant": "#c2c6d3",
+                      "tertiary-fixed": "#ffdbcc",
+                      "surface-container-low": "#eff4ff",
+                      "secondary-container": "#9fc2fe",
+                      "on-primary-container": "#9bbdff",
+                      "error": "#ba1a1a",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-primary": "#abc7ff",
+                      "primary": "#00346f",
+                      "secondary": "#3a5f94",
+                      "surface": "#f8f9ff",
+                      "surface-bright": "#f8f9ff",
+                      "surface-variant": "#d3e4fe",
+                      "on-error": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "on-primary-fixed": "#001b3f",
+                      "on-secondary-fixed": "#001b3c",
+                      "on-secondary-container": "#294f83",
+                      "tertiary": "#5f2200",
+                      "surface-dim": "#cbdbf5",
+                      "tertiary-fixed-dim": "#ffb694",
+                      "surface-tint": "#255dad",
+                      "on-tertiary-container": "#ffa77e",
+                      "primary-fixed": "#d7e2ff",
+                      "inverse-surface": "#213145",
+                      "surface-container-highest": "#d3e4fe",
+                      "secondary-fixed": "#d5e3ff",
+                      "on-tertiary-fixed": "#351000",
+                      "on-tertiary-fixed-variant": "#7b2f00",
+                      "on-primary-fixed-variant": "#00458f",
+                      "surface-container-high": "#dce9ff",
+                      "on-tertiary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "container-max": "1280px",
+                      "stack-md": "24px",
+                      "margin-mobile": "16px",
+                      "stack-lg": "48px",
+                      "stack-sm": "12px",
+                      "margin-desktop": "48px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "title-md": [
+                              "Public Sans"
+                      ],
+                      "display-lg": [
+                              "Public Sans"
+                      ],
+                      "headline-lg-mobile": [
+                              "Public Sans"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Public Sans"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "marathi": [
+                              "'Noto Sans Marathi'",
+                              "sans-serif"
+                      ]
+              },
+              "fontSize": {
+                      "title-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "60px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md antialiased pb-20 md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-surface border-b border-outline-variant w-full docked top-0 z-40 hidden md:block">
+<div class="flex justify-between items-center w-full px-margin-desktop h-16 max-w-container-max mx-auto">
+<div class="flex items-center gap-6">
+<span class="font-title-md text-title-md font-bold text-primary">Smart Nagar Parishad Shirol</span>
+<nav class="flex items-center gap-4">
+<a class="text-primary border-b-2 border-primary pb-1 font-label-md text-label-md hover:bg-surface-container-low transition-colors px-2 py-1" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md hover:bg-surface-container-low transition-colors px-2 py-1" href="#">Services</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md hover:bg-surface-container-low transition-colors px-2 py-1" href="#">Complaints</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md hover:bg-surface-container-low transition-colors px-2 py-1" href="#">Ward Info</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<input class="bg-surface-container-low border border-outline-variant rounded-full pl-4 pr-10 py-1.5 text-body-md font-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-on-surface placeholder-on-surface-variant" placeholder="Search..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+</div>
+<button aria-label="notifications" class="p-2 rounded-full hover:bg-surface-container-low text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="User Profile" class="p-2 rounded-full hover:bg-surface-container-low text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-md md:py-stack-lg flex flex-col gap-stack-lg">
+<!-- Hero & Quick Actions -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Welcome Card -->
+<div class="lg:col-span-8 bg-surface-container-low rounded-xl p-stack-md flex flex-col justify-between border border-outline-variant shadow-sm relative overflow-hidden min-h-[300px]">
+<div class="absolute inset-0 z-0">
+<img alt="Civic governance background" class="w-full h-full object-cover opacity-20 object-top" data-alt="A clean, bright architectural shot of a modern municipal building with smooth lines and clear blue skies in the background. The lighting is sunny and optimistic, conveying a sense of transparent, efficient corporate modern governance. The color palette is dominated by cool blues, whites, and soft grays, aligning perfectly with a stable, professional civic identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBT58IV57k_LNJC6_XhxO1GsEPP52K07tF55rP8TYZmXVHcJ6R9mmvo7z94fpuDVrKK8ONubq5forRZjmGgLg4U6mFcvl9OykPt5yw6GqPpdDLGkzzzuLzydrPiiX260mr7-jURIIqCXgdNbcZfHCl5plYurHWVlJzjmluGa2BQFmBOm6dZ6V_sVDVTuxttXQfLsiKkw-dc-9MzZHM5IvBZeMp_I2gNrVKwLZk3BY8AiCLmFVpReCImttugrrkBlA9WEKVm4X_ePcGY"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-low via-surface-container-low/90 to-transparent"></div>
+</div>
+<div class="relative z-10 flex flex-col gap-stack-sm max-w-2xl">
+<h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg text-on-surface">Welcome, Citizen<br/><span class="text-primary-container font-marathi font-headline-lg text-headline-lg-mobile md:text-headline-lg">नागरिक डॅशबोर्ड</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mt-2">Manage your civic services, track complaints, and stay updated with your ward's progress. <span class="block text-body-md mt-1 font-marathi">तुमच्या नागरी सेवा व्यवस्थापित करा आणि अद्यतने मिळवा.</span></p>
+</div>
+<div class="relative z-10 flex flex-wrap gap-4 mt-stack-md">
+<button class="bg-primary-container text-on-primary font-label-md text-label-md px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                        Submit a New Complaint
+                    </button>
+<button class="border-2 border-primary-container text-primary-container font-label-md text-label-md px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-lg">receipt_long</span>
+                        Pay Taxes
+                    </button>
+</div>
+</div>
+<!-- Quick Status -->
+<div class="lg:col-span-4 bg-surface rounded-xl p-stack-md border border-outline-variant flex flex-col gap-stack-sm shadow-sm">
+<div>
+<h2 class="font-title-md text-title-md text-on-surface">Track Status</h2>
+<p class="font-label-sm font-marathi text-label-sm text-on-surface-variant mt-1">स्थिती तपासा</p>
+</div>
+<div class="mt-auto">
+<label class="block font-label-md text-label-md text-on-surface mb-2">Ticket ID / <span class="font-marathi">अर्ज क्रमांक</span></label>
+<div class="flex gap-2">
+<input class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-2 text-body-md font-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-on-surface placeholder-on-surface-variant" placeholder="e.g. SH-2024-892" type="text"/>
+<button class="bg-secondary text-on-secondary p-2 rounded-lg hover:bg-on-secondary-container transition-colors flex items-center justify-center min-w-[48px]">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+<a class="text-primary font-label-sm text-label-sm mt-3 inline-block hover:underline" href="#">View recent tracking history →</a>
+</div>
+</div>
+</section>
+<!-- Stats & Categories Bento -->
+<section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-gutter">
+<!-- Stat Card 1 -->
+<div class="bg-surface rounded-xl p-stack-md border border-outline-variant shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">Active Complaints</p>
+<p class="font-label-sm font-marathi text-label-sm text-on-surface-variant">सक्रिय तक्रारी</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-error-container/50 flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined">pending_actions</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-on-surface">2</span>
+<span class="font-label-sm text-label-sm bg-surface-container-high px-2 py-0.5 rounded text-on-surface-variant">Needs Attention</span>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface rounded-xl p-stack-md border border-outline-variant shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">Resolved Issues</p>
+<p class="font-label-sm font-marathi text-label-sm text-on-surface-variant">सोडवलेले प्रश्न</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-container/50 flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">task_alt</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-on-surface">14</span>
+<span class="font-label-sm text-label-sm bg-surface-container-highest px-2 py-0.5 rounded text-on-surface-variant">This Year</span>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-surface rounded-xl p-stack-md border border-outline-variant shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">Resolution Success</p>
+<p class="font-label-sm font-marathi text-label-sm text-on-surface-variant">यशस्वीता दर</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-on-surface">87%</span>
+<span class="font-label-sm text-label-sm bg-surface-container-highest px-2 py-0.5 rounded text-on-surface-variant">Average</span>
+</div>
+</div>
+<!-- Category Links -->
+<div class="md:col-span-3 lg:col-span-2 grid grid-cols-2 gap-4">
+<a class="relative overflow-hidden bg-surface-container-low rounded-xl p-4 border border-outline-variant flex flex-col items-center justify-center text-center hover:shadow-[0_4px_12px_rgba(0,74,153,0.1)] hover:-translate-y-0.5 transition-all group" href="#">
+<div class="absolute inset-0 z-0">
+<img alt="Water Supply" class="w-full h-full object-cover opacity-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOCEgcyY7jBdtUMBQQ9gcsCCaHkJox0LEKv1YIToBAg4ipWTr2_C91Vhf4d5fr2f6fxoNvt1SBU173QNKHfN1jE_qi2ZTI-QsEhsSZKlPpG3W1dObG4j2V9W_bhgYI5eSUpnWvf6Jx69dsMZ00MEiYPhfk3GhiRGjw_AcQwOyx9sfMeNO80x5GyecuyA_82Wn-OXjQrbR3-Xol3alB8X7gzm40NJ4-u5gj6DoydVUvI4lGtkyTwRr8TXeKd56OGDPHRhLgV3NcHiC7"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface mb-3 flex items-center justify-center text-primary-container group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">water_drop</span>
+</div>
+<p class="font-title-md text-title-md text-on-surface mb-1">Water Supply</p>
+<p class="font-label-sm font-marathi text-label-sm text-on-surface-variant">पाणी पुरवठा</p>
+</div>
+</a>
+<a class="relative overflow-hidden bg-surface-container-low rounded-xl p-4 border border-outline-variant flex flex-col items-center justify-center text-center hover:shadow-[0_4px_12px_rgba(0,74,153,0.1)] hover:-translate-y-0.5 transition-all group" href="#">
+<div class="absolute inset-0 z-0">
+<img alt="Waste Management" class="w-full h-full object-cover opacity-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMbGVSI9maoDKEvdCu0-zoNVvaRTMWbyDJ5UNBoC3rEiUdveTOnM9tIQfSBkGp1RhdZOZ8CLEZ2EKb8vA4SVTOwXn0B9G6Tl88S0_Nqn0ASVhMujYop30PNg9KjaHcacJPiSBLuLqMQBgN2znBCal5QQ9ev1pviFHj0-fDAZvLXjOFWUWpVPLbthA8umVuqVC3IfFDUm1iKvTB8HaEKLapB1pNmyEI8xMECKsm6Zy4WUnAExEKeD9roTdX10_C4RKcTzE3nt-lwhzR"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface mb-3 flex items-center justify-center text-primary-container group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</div>
+<p class="font-title-md text-title-md text-on-surface mb-1">Waste Mgt</p>
+<p class="font-label-sm font-marathi text-label-sm text-on-surface-variant">कचरा व्यवस्थापन</p>
+</div>
+</a>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface border-t border-outline-variant shadow-lg md:hidden rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-highest rounded-xl px-4 py-1 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">add_circle</span>
+<span class="font-label-sm text-label-sm">Submit</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-highest rounded-xl px-4 py-1 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">history</span>
+<span class="font-label-sm text-label-sm">My Tracking</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-highest rounded-xl px-4 py-1 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="w-full bg-surface-container-highest py-8 px-margin-mobile md:px-margin-desktop mt-auto border-t border-outline-variant">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-stack-md">
+<div class="text-center md:text-left">
+<p class="font-title-md text-title-md text-on-surface mb-2">Smart Nagar Parishad Shirol</p>
+<p class="font-body-md text-body-md text-on-surface-variant">© 2024 Shirol Municipal Council. All rights reserved. Government of Maharashtra.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-4">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface hover:underline transition-colors" href="#">Public Notices</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface hover:underline transition-colors" href="#">Ward Map</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface hover:underline transition-colors" href="#">Contact Us</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface hover:underline transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface hover:underline transition-colors" href="#">Right to Information</a>
+</div>
+</div>
+</footer>
+</body></html>
