@@ -13,6 +13,47 @@ export interface Complaint {
 }
 
 const STORAGE_KEY = "smart_nagar_complaints";
+const DEPARTMENTS_KEY = "smart_nagar_departments";
+const EMPLOYEES_KEY = "smart_nagar_employees";
+
+// BroadcastChannel for instant cross-tab real-time sync
+const syncChannel =
+  typeof window !== "undefined" && "BroadcastChannel" in window
+    ? new BroadcastChannel("smart_nagar_sync_channel")
+    : null;
+
+export function notifySync() {
+  if (typeof window === "undefined") return;
+  try {
+    syncChannel?.postMessage({ type: "SYNC_DATA", timestamp: Date.now() });
+    window.dispatchEvent(new Event("smart_nagar_sync"));
+  } catch (e) {
+    console.error("Failed to emit sync notification", e);
+  }
+}
+
+export function subscribeToSync(callback: () => void) {
+  if (typeof window === "undefined") return () => {};
+
+  const handleMessage = () => callback();
+  const handleEvent = () => callback();
+
+  if (syncChannel) {
+    syncChannel.onmessage = handleMessage;
+  }
+  window.addEventListener("smart_nagar_sync", handleEvent);
+  window.addEventListener("storage", handleEvent);
+  window.addEventListener("focus", handleEvent);
+
+  const interval = setInterval(callback, 800);
+
+  return () => {
+    window.removeEventListener("smart_nagar_sync", handleEvent);
+    window.removeEventListener("storage", handleEvent);
+    window.removeEventListener("focus", handleEvent);
+    clearInterval(interval);
+  };
+}
 
 export function getComplaints(): Complaint[] {
   if (typeof window === "undefined") return [];
@@ -34,6 +75,7 @@ export function getComplaints(): Complaint[] {
       category: "Water Supply",
       description: "Pipeline leakage near Main Square",
       ward: "Ward 4",
+      area: "Main Market",
       status: "In Progress",
       assignedTo: "Santosh K.",
       timeline: [
@@ -48,6 +90,7 @@ export function getComplaints(): Complaint[] {
       category: "Solid Waste",
       description: "Garbage not collected for 3 days",
       ward: "Ward 1",
+      area: "Shivaji Chowk",
       status: "Pending",
       assignedTo: "Amit Deshmukh",
       timeline: [
@@ -61,6 +104,7 @@ export function getComplaints(): Complaint[] {
       category: "Streetlights",
       description: "Streetlight out near Park",
       ward: "Ward 7",
+      area: "Subhash Nagar",
       status: "Resolved",
       assignedTo: "Vijay E.",
       timeline: [
@@ -76,6 +120,7 @@ export function getComplaints(): Complaint[] {
 export function saveComplaints(complaints: Complaint[]) {
   if (typeof window === "undefined") return;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(complaints));
+  notifySync();
 }
 
 export function addComplaint(complaint: Complaint) {
@@ -103,28 +148,32 @@ export function assignComplaint(id: string, officerName: string) {
   const index = complaints.findIndex(c => c.id === id);
   if (index !== -1) {
     complaints[index].assignedTo = officerName;
+    complaints[index].status = "In Progress";
     complaints[index].timeline.push({
       status: "In Progress",
       date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       note: `Assigned to ${officerName}`
     });
-    if (complaints[index].status === "Pending") {
-      complaints[index].status = "In Progress";
-    }
     saveComplaints(complaints);
   }
 }
 
-// --- Department & Department Employee Models ---
+// --- Department Management Models & Functions ---
 
 export interface Department {
   id: string;
-  code: string;
   name: string;
-  headName: string;
-  headEmail: string;
-  description: string;
-  createdAt: string;
+  nameMr?: string;
+  code: string;
+  head?: string;
+  headName?: string;
+  headEmail?: string;
+  officerCount?: number;
+  activeTasks?: number;
+  icon?: string;
+  color?: string;
+  description?: string;
+  createdAt?: string;
 }
 
 export interface DepartmentEmployee {
@@ -139,9 +188,6 @@ export interface DepartmentEmployee {
   joinedDate: string;
 }
 
-const DEPARTMENTS_KEY = "smart_nagar_departments";
-const EMPLOYEES_KEY = "smart_nagar_employees";
-
 export function getDepartments(): Department[] {
   if (typeof window === "undefined") return [];
   const stored = localStorage.getItem(DEPARTMENTS_KEY);
@@ -152,51 +198,64 @@ export function getDepartments(): Department[] {
       console.error("Failed to parse departments from localStorage", e);
     }
   }
-  const defaultDepts: Department[] = [
+  const defaultDepartments: Department[] = [
     {
       id: "DEPT-101",
-      code: "WTR",
       name: "Water Supply & Sanitation",
-      headName: "Er. Rajesh Kulkarni",
-      headEmail: "water.head@shirolnagar.gov.in",
-      description: "Manages drinking water distribution, pipeline maintenance, and sewage control.",
-      createdAt: "2024-01-15"
+      nameMr: "पाणी पुरवठा व स्वच्छता विभाग",
+      code: "WATER",
+      head: "Shri. Rajesh Patil",
+      officerCount: 6,
+      activeTasks: 12,
+      icon: "Droplet",
+      color: "bg-blue-500",
+      description: "Handles drinking water pipelines, pump houses, and supply schedules."
     },
     {
       id: "DEPT-102",
-      code: "SWM",
       name: "Solid Waste Management",
-      headName: "Prakash Jadhav",
-      headEmail: "swm.head@shirolnagar.gov.in",
-      description: "Responsible for daily garbage collection, street sweeping, and waste treatment.",
-      createdAt: "2024-01-15"
+      nameMr: "घनकचरा व्यवस्थापन विभाग",
+      code: "GARBAGE",
+      head: "Smt. Sunita Jadhav",
+      officerCount: 8,
+      activeTasks: 19,
+      icon: "Trash2",
+      color: "bg-emerald-500",
+      description: "Manages daily door-to-door garbage collection and town cleanliness."
     },
     {
       id: "DEPT-103",
-      code: "ELE",
       name: "Electricity & Streetlights",
-      headName: "Vijay More",
-      headEmail: "electrical.head@shirolnagar.gov.in",
-      description: "Oversees public streetlight maintenance, municipal power grids, and solar projects.",
-      createdAt: "2024-02-01"
+      nameMr: "विद्युत व पथदिवे विभाग",
+      code: "STREETLIGHTS",
+      head: "Shri. Prakash Pawar",
+      officerCount: 4,
+      activeTasks: 8,
+      icon: "Lightbulb",
+      color: "bg-amber-500",
+      description: "Maintains streetlight poles, LED transformers, and power lines."
     },
     {
       id: "DEPT-104",
-      code: "RDS",
-      name: "Roads & Infrastructure",
-      headName: "Sunil Shinde",
-      headEmail: "roads.head@shirolnagar.gov.in",
-      description: "Handles road repair, drainage construction, and public building maintenance.",
-      createdAt: "2024-02-10"
+      name: "Roads & Civil Infrastructure",
+      nameMr: "रस्ते व बांधकाम विभाग",
+      code: "ROADS",
+      head: "Shri. Nitin Gavali",
+      officerCount: 5,
+      activeTasks: 14,
+      icon: "Route",
+      color: "bg-purple-500",
+      description: "Repairs potholes, tar roads, gutters, and public structures."
     }
   ];
-  localStorage.setItem(DEPARTMENTS_KEY, JSON.stringify(defaultDepts));
-  return defaultDepts;
+  localStorage.setItem(DEPARTMENTS_KEY, JSON.stringify(defaultDepartments));
+  return defaultDepartments;
 }
 
 export function saveDepartments(departments: Department[]) {
   if (typeof window === "undefined") return;
   localStorage.setItem(DEPARTMENTS_KEY, JSON.stringify(departments));
+  notifySync();
 }
 
 export function addDepartment(department: Department) {
@@ -273,6 +332,7 @@ export function getDepartmentEmployees(): DepartmentEmployee[] {
 export function saveDepartmentEmployees(employees: DepartmentEmployee[]) {
   if (typeof window === "undefined") return;
   localStorage.setItem(EMPLOYEES_KEY, JSON.stringify(employees));
+  notifySync();
 }
 
 export function addDepartmentEmployee(employee: DepartmentEmployee) {
@@ -302,11 +362,13 @@ const AUTH_KEY = "smart_nagar_auth";
 export function login(user: User) {
   if (typeof window === "undefined") return;
   localStorage.setItem(AUTH_KEY, JSON.stringify(user));
+  notifySync();
 }
 
 export function logout() {
   if (typeof window === "undefined") return;
   localStorage.removeItem(AUTH_KEY);
+  notifySync();
 }
 
 export function getCurrentUser(): User | null {

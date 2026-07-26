@@ -10,7 +10,8 @@ import {
   getCurrentUser,
   User,
   getDepartmentEmployees,
-  DepartmentEmployee
+  DepartmentEmployee,
+  subscribeToSync
 } from "@/lib/store";
 
 export default function AllComplaints() {
@@ -33,20 +34,13 @@ export default function AllComplaints() {
       setEmployees(getDepartmentEmployees());
     });
 
-    // Real-time synchronization listener & polling
-    const refreshData = () => {
+    const unsubscribe = subscribeToSync(() => {
       setComplaints(getComplaints());
       setEmployees(getDepartmentEmployees());
-    };
-
-    window.addEventListener("storage", refreshData);
-    window.addEventListener("focus", refreshData);
-    const interval = setInterval(refreshData, 1500);
+    });
 
     return () => {
-      window.removeEventListener("storage", refreshData);
-      window.removeEventListener("focus", refreshData);
-      clearInterval(interval);
+      unsubscribe();
     };
   }, []);
 

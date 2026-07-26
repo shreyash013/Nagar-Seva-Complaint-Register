@@ -15,7 +15,7 @@ import {
   X,
   Image as ImageIcon
 } from "lucide-react";
-import { getComplaints, updateComplaintStatus, Complaint, getCurrentUser } from "@/lib/store";
+import { getComplaints, updateComplaintStatus, Complaint, getCurrentUser, subscribeToSync } from "@/lib/store";
 
 export default function NagaradhyakshDashboard() {
   const [complaints, setComplaints] = useState<Complaint[]>([]);
@@ -32,15 +32,12 @@ export default function NagaradhyakshDashboard() {
       refreshComplaints();
     });
 
-    const handleStorage = () => refreshComplaints();
-    window.addEventListener("storage", handleStorage);
-    window.addEventListener("focus", handleStorage);
-    const interval = setInterval(refreshComplaints, 1500);
+    const unsubscribe = subscribeToSync(() => {
+      refreshComplaints();
+    });
 
     return () => {
-      window.removeEventListener("storage", handleStorage);
-      window.removeEventListener("focus", handleStorage);
-      clearInterval(interval);
+      unsubscribe();
     };
   }, []);
 

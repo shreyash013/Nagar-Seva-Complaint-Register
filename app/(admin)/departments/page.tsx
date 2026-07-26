@@ -144,7 +144,7 @@ export default function DepartmentsManagementPage() {
     (d) =>
       d.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       d.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      d.headName.toLowerCase().includes(searchQuery.toLowerCase())
+      (d.headName || d.head || "").toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const filteredEmployees = employees.filter((e) => {

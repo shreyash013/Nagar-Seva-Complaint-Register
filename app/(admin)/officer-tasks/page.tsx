@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { SortAsc, Filter, Calendar, Grid } from "lucide-react";
-import { getComplaints, updateComplaintStatus, Complaint, getCurrentUser, User } from "@/lib/store";
+import { getComplaints, updateComplaintStatus, Complaint, getCurrentUser, User, subscribeToSync } from "@/lib/store";
 
 export default function OfficerTasks() {
   const [complaints, setComplaints] = useState<Complaint[]>([]);
@@ -19,8 +19,14 @@ export default function OfficerTasks() {
       setUser(getCurrentUser());
       refreshData();
     });
-    window.addEventListener("storage", refreshData);
-    return () => window.removeEventListener("storage", refreshData);
+    
+    const unsubscribe = subscribeToSync(() => {
+      refreshData();
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const handleUpdateStatus = (id: string, newStatus: "Pending" | "In Progress" | "Resolved") => {
