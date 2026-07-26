@@ -1,4 +1,4 @@
-import { Search, Maximize, ArrowRight, User, Phone, ChevronDown, Building2 } from "lucide-react";
+import { Search, Maximize, ArrowRight, User, Phone, Building2 } from "lucide-react";
 import Image from "next/image";
 
 const MAYOR_INFO = {

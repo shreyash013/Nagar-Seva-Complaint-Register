@@ -13,7 +13,9 @@ export function Header() {
   const router = useRouter();
 
   useEffect(() => {
-    setUser(getCurrentUser());
+    queueMicrotask(() => {
+      setUser(getCurrentUser());
+    });
   }, []);
 
   useEffect(() => {

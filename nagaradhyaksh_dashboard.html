@@ -202,7 +202,8 @@
 </select>
 </div>
 <button class="bg-surface border border-outline-variant rounded-lg p-2 text-on-surface hover:bg-surface-container-low transition-colors flex-shrink-0">
-<span class="material-symbols-outlined">filter_list</span>
+<button class="bg-surface border border-outline-variant rounded-lg p-2 text-on-surface hover:bg-surface-container-low transition-colors flex-shrink-0" onclick="window.location.reload()">
+<span class="material-symbols-outlined">refresh</span>
 </button>
 </div>
 </div>
@@ -216,10 +217,10 @@
 </div>
 </div>
 <div>
-<div class="font-display-lg text-[32px] md:text-[40px] text-on-surface leading-none">1,248</div>
+<div id="stat-total-complaints" class="font-display-lg text-[32px] md:text-[40px] text-on-surface leading-none font-bold">--</div>
 <div class="flex items-center text-secondary font-label-sm text-label-sm mt-1">
 <span class="material-symbols-outlined text-[14px]">arrow_upward</span>
-<span>12% from last mo</span>
+<span>Live Count</span>
 </div>
 </div>
 </div>
@@ -231,10 +232,10 @@
 </div>
 </div>
 <div>
-<div class="font-display-lg text-[32px] md:text-[40px] text-on-surface leading-none">982</div>
+<div id="stat-resolved-complaints" class="font-display-lg text-[32px] md:text-[40px] text-on-surface leading-none font-bold">--</div>
 <div class="flex items-center text-[#146c2e] font-label-sm text-label-sm mt-1">
 <span class="material-symbols-outlined text-[14px]">arrow_upward</span>
-<span>8% from last mo</span>
+<span>Live Count</span>
 </div>
 </div>
 </div>
@@ -246,25 +247,25 @@
 </div>
 </div>
 <div>
-<div class="font-display-lg text-[32px] md:text-[40px] text-on-surface leading-none">78.6%</div>
-<div class="flex items-center text-error font-label-sm text-label-sm mt-1">
-<span class="material-symbols-outlined text-[14px]">arrow_downward</span>
-<span>2% from last mo</span>
+<div id="stat-resolution-rate" class="font-display-lg text-[32px] md:text-[40px] text-on-surface leading-none font-bold">--%</div>
+<div class="flex items-center text-secondary font-label-sm text-label-sm mt-1">
+<span class="material-symbols-outlined text-[14px]">check</span>
+<span>Completed ratio</span>
 </div>
 </div>
 </div>
 <div class="bg-surface border border-outline-variant rounded-xl p-4 md:p-6 flex flex-col justify-between h-32 md:h-40">
 <div class="flex justify-between items-start">
-<span class="font-label-md text-label-md text-on-surface-variant">Avg. Time</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Active Pending</span>
 <div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
 <span class="material-symbols-outlined text-[18px]">timer</span>
 </div>
 </div>
 <div>
-<div class="font-display-lg text-[32px] md:text-[40px] text-on-surface leading-none">4.2<span class="text-[18px] text-on-surface-variant ml-1 font-body-md">days</span></div>
-<div class="flex items-center text-[#146c2e] font-label-sm text-label-sm mt-1">
-<span class="material-symbols-outlined text-[14px]">arrow_downward</span>
-<span>0.5 days from last mo</span>
+<div id="stat-active-pending" class="font-display-lg text-[32px] md:text-[40px] text-on-surface leading-none font-bold">--</div>
+<div class="flex items-center text-tertiary font-label-sm text-label-sm mt-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span>Action required</span>
 </div>
 </div>
 </div>
@@ -274,9 +275,9 @@
 <div class="lg:col-span-2 bg-surface border border-outline-variant rounded-xl p-6 flex flex-col">
 <div class="flex justify-between items-center mb-6">
 <h3 class="font-title-md text-title-md text-on-surface">Ward-wise Volume</h3>
-<button class="text-primary font-label-md text-label-md hover:underline">View Map</button>
+<button class="text-primary font-label-md text-label-md hover:underline">Live Breakdown</button>
 </div>
-<div class="flex-1 min-h-[300px] bg-surface-container-low rounded-lg flex items-end justify-around p-4 gap-2 border border-outline-variant/50">
+<div id="ward-volume-bars" class="flex-1 min-h-[300px] bg-surface-container-low rounded-lg flex items-end justify-around p-4 gap-2 border border-outline-variant/50">
 <!-- Simulated Bar Chart -->
 <div class="w-full flex flex-col items-center gap-2 group">
 <div class="w-full bg-error-container/80 rounded-t-sm transition-all duration-300 group-hover:bg-error-container" style="height: 85%;"></div>
@@ -310,7 +311,7 @@
 </div>
 <!-- Category Trends -->
 <div class="bg-surface border border-outline-variant rounded-xl p-6 flex flex-col">
-<h3 class="font-title-md text-title-md text-on-surface mb-6">Category Trends</h3>
+<h3 class="font-title-md text-title-md text-on-surface mb-6">Category Breakdown</h3>
 <div class="space-y-6 flex-1">
 <div>
 <div class="flex justify-between items-center mb-2">
@@ -318,10 +319,10 @@
 <span class="material-symbols-outlined text-secondary text-[18px]">water_drop</span>
 <span class="font-label-md text-label-md text-on-surface">Water Supply</span>
 </div>
-<span class="font-label-sm text-label-sm text-error flex items-center"><span class="material-symbols-outlined text-[14px]">trending_up</span> 42%</span>
+<span class="font-label-sm text-label-sm text-primary flex items-center font-semibold" id="cat-pct-water">--%</span>
 </div>
 <div class="w-full bg-surface-container-high rounded-full h-2">
-<div class="bg-secondary h-2 rounded-full" style="width: 75%"></div>
+<div id="cat-bar-water" class="bg-secondary h-2 rounded-full" style="width: 50%"></div>
 </div>
 </div>
 <div>
@@ -330,10 +331,10 @@
 <span class="material-symbols-outlined text-tertiary text-[18px]">delete</span>
 <span class="font-label-md text-label-md text-on-surface">Solid Waste</span>
 </div>
-<span class="font-label-sm text-label-sm text-[#146c2e] flex items-center"><span class="material-symbols-outlined text-[14px]">trending_down</span> 12%</span>
+<span class="font-label-sm text-label-sm text-primary flex items-center font-semibold" id="cat-pct-waste">--%</span>
 </div>
 <div class="w-full bg-surface-container-high rounded-full h-2">
-<div class="bg-tertiary h-2 rounded-full" style="width: 45%"></div>
+<div id="cat-bar-waste" class="bg-tertiary h-2 rounded-full" style="width: 30%"></div>
 </div>
 </div>
 <div>
@@ -342,22 +343,10 @@
 <span class="material-symbols-outlined text-primary text-[18px]">lightbulb</span>
 <span class="font-label-md text-label-md text-on-surface">Street Lights</span>
 </div>
-<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center"><span class="material-symbols-outlined text-[14px]">trending_flat</span> 2%</span>
+<span class="font-label-sm text-label-sm text-primary flex items-center font-semibold" id="cat-pct-lights">--%</span>
 </div>
 <div class="w-full bg-surface-container-high rounded-full h-2">
-<div class="bg-primary h-2 rounded-full" style="width: 30%"></div>
-</div>
-</div>
-<div>
-<div class="flex justify-between items-center mb-2">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-outline text-[18px]">add_road</span>
-<span class="font-label-md text-label-md text-on-surface">Roads</span>
-</div>
-<span class="font-label-sm text-label-sm text-error flex items-center"><span class="material-symbols-outlined text-[14px]">trending_up</span> 18%</span>
-</div>
-<div class="w-full bg-surface-container-high rounded-full h-2">
-<div class="bg-outline h-2 rounded-full" style="width: 55%"></div>
+<div id="cat-bar-lights" class="bg-primary h-2 rounded-full" style="width: 20%"></div>
 </div>
 </div>
 </div>
@@ -366,8 +355,8 @@
 <!-- Recent High Priority -->
 <div class="bg-surface border border-outline-variant rounded-xl overflow-hidden">
 <div class="p-6 border-b border-outline-variant flex justify-between items-center">
-<h3 class="font-title-md text-title-md text-on-surface">High Priority Escalations</h3>
-<button class="text-primary font-label-md text-label-md hover:underline">View All</button>
+<h3 class="font-title-md text-title-md text-on-surface font-bold">Active Pending Escalations</h3>
+<button class="text-primary font-label-md text-label-md hover:underline font-semibold" onclick="renderDashboard()">Refresh</button>
 </div>
 <div class="overflow-x-auto">
 <table class="w-full text-left border-collapse">
@@ -377,51 +366,112 @@
 <th class="py-3 px-6 font-medium">Category</th>
 <th class="py-3 px-6 font-medium">Ward</th>
 <th class="py-3 px-6 font-medium">Status</th>
-<th class="py-3 px-6 font-medium">Days Open</th>
+<th class="py-3 px-6 font-medium">Date</th>
 <th class="py-3 px-6 font-medium text-right">Action</th>
 </tr>
 </thead>
-<tbody class="font-body-md text-body-md text-on-surface">
-<tr class="border-b border-outline-variant/50 hover:bg-surface-container-lowest transition-colors">
-<td class="py-4 px-6 font-label-md text-label-md">#CMP-8492</td>
-<td class="py-4 px-6">Major Pipeline Burst</td>
-<td class="py-4 px-6">Ward 1</td>
-<td class="py-4 px-6">
-<span class="px-3 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm">Critical</span>
-</td>
-<td class="py-4 px-6 text-error font-medium">4 Days</td>
-<td class="py-4 px-6 text-right">
-<button class="text-primary hover:text-primary-fixed-variant font-label-md text-label-md">Intervene</button>
-</td>
-</tr>
-<tr class="border-b border-outline-variant/50 hover:bg-surface-container-lowest transition-colors">
-<td class="py-4 px-6 font-label-md text-label-md">#CMP-8501</td>
-<td class="py-4 px-6">Garbage Dump Overflow</td>
-<td class="py-4 px-6">Ward 5</td>
-<td class="py-4 px-6">
-<span class="px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm">High</span>
-</td>
-<td class="py-4 px-6">3 Days</td>
-<td class="py-4 px-6 text-right">
-<button class="text-primary hover:text-primary-fixed-variant font-label-md text-label-md">Intervene</button>
-</td>
-</tr>
-<tr class="hover:bg-surface-container-lowest transition-colors">
-<td class="py-4 px-6 font-label-md text-label-md">#CMP-8512</td>
-<td class="py-4 px-6">Transformer Failure</td>
-<td class="py-4 px-6">Ward 2</td>
-<td class="py-4 px-6">
-<span class="px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm">High</span>
-</td>
-<td class="py-4 px-6">2 Days</td>
-<td class="py-4 px-6 text-right">
-<button class="text-primary hover:text-primary-fixed-variant font-label-md text-label-md">Intervene</button>
-</td>
-</tr>
+<tbody id="active-escalations-tbody" class="font-body-md text-body-md text-on-surface">
 </tbody>
 </table>
 </div>
 </div>
 </main>
 </div>
+<script>
+(function() {
+  const STORAGE_KEY = "smart_nagar_complaints";
+  const defaultComplaints = [
+    { id: "SH-2024-892", citizenName: "Ramesh Patil", category: "Water Supply", description: "Pipeline leakage near Main Square", ward: "Ward 4", status: "In Progress", date: "Oct 24, 2024" },
+    { id: "SH-2024-890", citizenName: "Sita Sharma", category: "Solid Waste", description: "Garbage not collected for 3 days", ward: "Ward 1", status: "Pending", date: "Oct 23, 2024" },
+    { id: "SH-2024-885", citizenName: "Amit Deshmukh", category: "Streetlights", description: "Streetlight out near Park", ward: "Ward 7", status: "Resolved", date: "Oct 20, 2024" }
+  ];
+
+  function loadComplaints() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultComplaints));
+      return defaultComplaints;
+    }
+    try {
+      return JSON.parse(raw);
+    } catch(e) {
+      return defaultComplaints;
+    }
+  }
+
+  function renderDashboard() {
+    const complaints = loadComplaints();
+    const total = complaints.length;
+    const resolved = complaints.filter(c => c.status === "Resolved").length;
+    const pending = complaints.filter(c => c.status === "Pending").length;
+    const inProgress = complaints.filter(c => c.status === "In Progress").length;
+    const rate = total > 0 ? ((resolved / total) * 100).toFixed(1) + "%" : "0.0%";
+
+    const totalEl = document.getElementById("stat-total-complaints");
+    if (totalEl) totalEl.innerText = total;
+
+    const resolvedEl = document.getElementById("stat-resolved-complaints");
+    if (resolvedEl) resolvedEl.innerText = resolved;
+
+    const rateEl = document.getElementById("stat-resolution-rate");
+    if (rateEl) rateEl.innerText = rate;
+
+    const activePendingEl = document.getElementById("stat-active-pending");
+    if (activePendingEl) activePendingEl.innerText = pending + inProgress;
+
+    // Categories
+    const waterCount = complaints.filter(c => c.category.toLowerCase().includes("water")).length;
+    const wasteCount = complaints.filter(c => c.category.toLowerCase().includes("waste") || c.category.toLowerCase().includes("garbage")).length;
+    const lightCount = complaints.filter(c => c.category.toLowerCase().includes("light")).length;
+
+    const waterPct = total > 0 ? Math.round((waterCount / total) * 100) : 0;
+    const wastePct = total > 0 ? Math.round((wasteCount / total) * 100) : 0;
+    const lightPct = total > 0 ? Math.round((lightCount / total) * 100) : 0;
+
+    const catWaterPct = document.getElementById("cat-pct-water");
+    const catWaterBar = document.getElementById("cat-bar-water");
+    if (catWaterPct) catWaterPct.innerText = waterPct + "%";
+    if (catWaterBar) catWaterBar.style.width = Math.max(5, waterPct) + "%";
+
+    const catWastePct = document.getElementById("cat-pct-waste");
+    const catWasteBar = document.getElementById("cat-bar-waste");
+    if (catWastePct) catWastePct.innerText = wastePct + "%";
+    if (catWasteBar) catWasteBar.style.width = Math.max(5, wastePct) + "%";
+
+    const catLightPct = document.getElementById("cat-pct-lights");
+    const catLightBar = document.getElementById("cat-bar-lights");
+    if (catLightPct) catLightPct.innerText = lightPct + "%";
+    if (catLightBar) catLightBar.style.width = Math.max(5, lightPct) + "%";
+
+    // Active escalations table
+    const activeList = complaints.filter(c => c.status !== "Resolved");
+    const tbody = document.getElementById("active-escalations-tbody");
+    if (tbody) {
+      if (activeList.length === 0) {
+        tbody.innerHTML = '<tr><td colSpan="6" class="py-6 text-center text-on-surface-variant font-medium">No active escalations! All complaints resolved.</td></tr>';
+      } else {
+        tbody.innerHTML = activeList.map(c => `
+          <tr class="border-b border-outline-variant/50 hover:bg-surface-container-lowest transition-colors">
+            <td class="py-4 px-6 font-label-md text-label-md text-primary font-bold">${c.id}</td>
+            <td class="py-4 px-6 font-medium">${c.category}</td>
+            <td class="py-4 px-6">${c.ward}</td>
+            <td class="py-4 px-6">
+              <span class="px-3 py-1 rounded-full ${c.status === 'Pending' ? 'bg-error-container text-on-error-container' : 'bg-tertiary-fixed text-on-tertiary-fixed'} font-label-sm text-label-sm font-semibold">${c.status}</span>
+            </td>
+            <td class="py-4 px-6 font-medium">${c.date || 'Recent'}</td>
+            <td class="py-4 px-6 text-right">
+              <button onclick="alert('Complaint ${c.id}: ${c.description}')" class="text-primary hover:underline font-label-md text-label-md font-semibold">View</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+  }
+
+  window.renderDashboard = renderDashboard;
+  document.addEventListener("DOMContentLoaded", renderDashboard);
+  window.addEventListener("storage", renderDashboard);
+  renderDashboard();
+})();
+</script>
 </body></html>

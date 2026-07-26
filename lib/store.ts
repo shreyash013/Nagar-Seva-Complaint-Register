@@ -33,7 +33,7 @@ export function getComplaints(): Complaint[] {
       description: "Pipeline leakage near Main Square",
       ward: "Ward 4",
       status: "In Progress",
-      assignedTo: "Assign",
+      assignedTo: "Santosh K.",
       timeline: [
         { status: "Complaint Submitted", date: "Oct 24, 2024", note: "Complaint registered." },
         { status: "Forwarded to Dept", date: "Oct 24, 2024", note: "Sent to Water Dept." }
@@ -47,7 +47,7 @@ export function getComplaints(): Complaint[] {
       description: "Garbage not collected for 3 days",
       ward: "Ward 1",
       status: "Pending",
-      assignedTo: "Santosh K.",
+      assignedTo: "Amit Deshmukh",
       timeline: [
         { status: "Complaint Submitted", date: "Oct 23, 2024", note: "Complaint registered." }
       ]
@@ -102,16 +102,186 @@ export function assignComplaint(id: string, officerName: string) {
   if (index !== -1) {
     complaints[index].assignedTo = officerName;
     complaints[index].timeline.push({
-      status: "In Progress", // Optional: automatically set to In Progress when assigned
+      status: "In Progress",
       date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       note: `Assigned to ${officerName}`
     });
-    // Ensure status is at least In Progress if it was pending
     if (complaints[index].status === "Pending") {
       complaints[index].status = "In Progress";
     }
     saveComplaints(complaints);
   }
+}
+
+// --- Department & Department Employee Models ---
+
+export interface Department {
+  id: string;
+  code: string;
+  name: string;
+  headName: string;
+  headEmail: string;
+  description: string;
+  createdAt: string;
+}
+
+export interface DepartmentEmployee {
+  id: string;
+  name: string;
+  departmentId: string;
+  departmentName: string;
+  designation: string;
+  email: string;
+  phone: string;
+  status: "Active" | "Inactive";
+  joinedDate: string;
+}
+
+const DEPARTMENTS_KEY = "smart_nagar_departments";
+const EMPLOYEES_KEY = "smart_nagar_employees";
+
+export function getDepartments(): Department[] {
+  if (typeof window === "undefined") return [];
+  const stored = localStorage.getItem(DEPARTMENTS_KEY);
+  if (stored) {
+    try {
+      return JSON.parse(stored);
+    } catch (e) {
+      console.error("Failed to parse departments from localStorage", e);
+    }
+  }
+  const defaultDepts: Department[] = [
+    {
+      id: "DEPT-101",
+      code: "WTR",
+      name: "Water Supply & Sanitation",
+      headName: "Er. Rajesh Kulkarni",
+      headEmail: "water.head@shirolnagar.gov.in",
+      description: "Manages drinking water distribution, pipeline maintenance, and sewage control.",
+      createdAt: "2024-01-15"
+    },
+    {
+      id: "DEPT-102",
+      code: "SWM",
+      name: "Solid Waste Management",
+      headName: "Prakash Jadhav",
+      headEmail: "swm.head@shirolnagar.gov.in",
+      description: "Responsible for daily garbage collection, street sweeping, and waste treatment.",
+      createdAt: "2024-01-15"
+    },
+    {
+      id: "DEPT-103",
+      code: "ELE",
+      name: "Electricity & Streetlights",
+      headName: "Vijay More",
+      headEmail: "electrical.head@shirolnagar.gov.in",
+      description: "Oversees public streetlight maintenance, municipal power grids, and solar projects.",
+      createdAt: "2024-02-01"
+    },
+    {
+      id: "DEPT-104",
+      code: "RDS",
+      name: "Roads & Infrastructure",
+      headName: "Sunil Shinde",
+      headEmail: "roads.head@shirolnagar.gov.in",
+      description: "Handles road repair, drainage construction, and public building maintenance.",
+      createdAt: "2024-02-10"
+    }
+  ];
+  localStorage.setItem(DEPARTMENTS_KEY, JSON.stringify(defaultDepts));
+  return defaultDepts;
+}
+
+export function saveDepartments(departments: Department[]) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(DEPARTMENTS_KEY, JSON.stringify(departments));
+}
+
+export function addDepartment(department: Department) {
+  const depts = getDepartments();
+  depts.unshift(department);
+  saveDepartments(depts);
+}
+
+export function deleteDepartment(id: string) {
+  const depts = getDepartments().filter(d => d.id !== id);
+  saveDepartments(depts);
+}
+
+export function getDepartmentEmployees(): DepartmentEmployee[] {
+  if (typeof window === "undefined") return [];
+  const stored = localStorage.getItem(EMPLOYEES_KEY);
+  if (stored) {
+    try {
+      return JSON.parse(stored);
+    } catch (e) {
+      console.error("Failed to parse employees from localStorage", e);
+    }
+  }
+  const defaultEmployees: DepartmentEmployee[] = [
+    {
+      id: "EMP-501",
+      name: "Santosh K.",
+      departmentId: "DEPT-101",
+      departmentName: "Water Supply & Sanitation",
+      designation: "Senior Field Inspector",
+      email: "santosh.k@shirolnagar.gov.in",
+      phone: "+91 98221 04512",
+      status: "Active",
+      joinedDate: "2024-02-01"
+    },
+    {
+      id: "EMP-502",
+      name: "Vijay E.",
+      departmentId: "DEPT-103",
+      departmentName: "Electricity & Streetlights",
+      designation: "Electrical Supervisor",
+      email: "vijay.e@shirolnagar.gov.in",
+      phone: "+91 94230 11984",
+      status: "Active",
+      joinedDate: "2024-02-15"
+    },
+    {
+      id: "EMP-503",
+      name: "Amit Deshmukh",
+      departmentId: "DEPT-102",
+      departmentName: "Solid Waste Management",
+      designation: "Sanitation Supervisor",
+      email: "amit.d@shirolnagar.gov.in",
+      phone: "+91 98902 33411",
+      status: "Active",
+      joinedDate: "2024-03-01"
+    },
+    {
+      id: "EMP-504",
+      name: "Sachin Patil",
+      departmentId: "DEPT-104",
+      departmentName: "Roads & Infrastructure",
+      designation: "Civil Engineer Assistant",
+      email: "sachin.p@shirolnagar.gov.in",
+      phone: "+91 97654 88210",
+      status: "Active",
+      joinedDate: "2024-03-10"
+    }
+  ];
+  localStorage.setItem(EMPLOYEES_KEY, JSON.stringify(defaultEmployees));
+  return defaultEmployees;
+}
+
+export function saveDepartmentEmployees(employees: DepartmentEmployee[]) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(EMPLOYEES_KEY, JSON.stringify(employees));
+}
+
+export function addDepartmentEmployee(employee: DepartmentEmployee) {
+  const employees = getDepartmentEmployees();
+  employees.unshift(employee);
+  saveDepartmentEmployees(employees);
+}
+
+export function deleteDepartmentEmployee(id: string) {
+  const employees = getDepartmentEmployees().filter(e => e.id !== id);
+  saveDepartmentEmployees(employees);
 }
 
 // --- Auth State ---
@@ -122,6 +292,7 @@ export interface User {
   id: string;
   name: string;
   role: Role;
+  uniqueId?: string;
 }
 
 const AUTH_KEY = "smart_nagar_auth";
@@ -147,4 +318,16 @@ export function getCurrentUser(): User | null {
     }
   }
   return null;
+}
+
+export function generateSystemUniqueId(role: Role): string {
+  const prefixMap: Record<Role, string> = {
+    admin: "SNP-ADM",
+    mayor: "SNP-MYR",
+    officer: "SNP-OFF",
+    citizen: "SNP-CIT"
+  };
+  const prefix = prefixMap[role] || "SNP-USR";
+  const num = Math.floor(1000 + Math.random() * 9000);
+  return `${prefix}-${num}`;
 }

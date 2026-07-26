@@ -15,6 +15,7 @@ import {
   Settings,
   HelpCircle,
   Briefcase,
+  Building2,
   LogOut
 } from "lucide-react";
 
@@ -25,13 +26,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
-    const currentUser = getCurrentUser();
-    if (!currentUser) {
-      router.push("/login");
-    } else {
-      setUser(currentUser);
-    }
+    queueMicrotask(() => {
+      setIsMounted(true);
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        router.push("/login");
+      } else {
+        setUser(currentUser);
+      }
+    });
   }, [router]);
 
   const handleLogout = (e: React.MouseEvent) => {
@@ -41,21 +44,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   };
 
   const isActive = (path: string) => {
-    return pathname === path 
-      ? "bg-surface-container-high text-primary font-semibold" 
+    return pathname === path
+      ? "bg-surface-container-high text-primary font-semibold"
       : "text-on-surface-variant hover:bg-surface-container-high font-medium";
   };
 
   if (!isMounted || !user) {
     return <div className="min-h-screen bg-background flex items-center justify-center">Loading...</div>;
   }
-
-  const roleDisplay: Record<string, string> = {
-    "admin": "Super Admin",
-    "officer": "Officer / Dept Head",
-    "mayor": "Mayor / Examiner",
-    "citizen": "Citizen"
-  };
 
   return (
     <div className="flex w-full min-h-screen bg-background">
@@ -67,7 +63,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
           <div>
             <h2 className="font-heading text-title-md text-primary font-bold">Admin Panel</h2>
-            <p className="font-sans text-label-sm text-on-surface-variant">{user.name} ({roleDisplay[user.role]})</p>
+            <p className="font-sans text-label-sm text-on-surface-variant font-medium">{user.name}</p>
+            {user.uniqueId && (
+              <span className="inline-block mt-0.5 px-2 py-0.5 bg-primary/10 text-primary font-mono text-[11px] font-bold rounded">
+                ID: {user.uniqueId}
+              </span>
+            )}
           </div>
         </div>
 
@@ -92,6 +93,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Link href="/all-complaints" className={`rounded-lg mx-2 flex items-center space-x-3 px-4 py-3 font-sans text-label-md transition-transform duration-200 ${isActive('/all-complaints')}`}>
                 <ListTodo className="w-5 h-5" />
                 <span>All Complaints</span>
+              </Link>
+            </li>
+            <li>
+              <Link href="/departments" className={`rounded-lg mx-2 flex items-center space-x-3 px-4 py-3 font-sans text-label-md transition-transform duration-200 ${isActive('/departments')}`}>
+                <Building2 className="w-5 h-5" />
+                <span>Departments & Staff</span>
               </Link>
             </li>
             {user.role !== "mayor" && (

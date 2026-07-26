@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { PlusCircle, Receipt, Search, Clock, CheckCircle, TrendingUp, Droplet, Trash2 } from "lucide-react";
 
@@ -10,6 +9,7 @@ export default function CitizenDashboard() {
         {/* Welcome Card */}
         <div className="lg:col-span-8 bg-surface-container-low rounded-xl p-stack-md flex flex-col justify-between border border-outline-variant shadow-sm relative overflow-hidden min-h-[300px]">
           <div className="absolute inset-0 z-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt="Civic governance background"
               className="w-full h-full object-cover opacity-20 object-top"
@@ -25,7 +25,7 @@ export default function CitizenDashboard() {
               </span>
             </h1>
             <p className="font-sans text-body-lg text-on-surface-variant max-w-lg mt-2">
-              Manage your civic services, track complaints, and stay updated with your ward's progress.{" "}
+              Manage your civic services, track complaints, and stay updated with your ward&apos;s progress.{" "}
               <span className="block text-body-md mt-1 font-sans">
                 तुमच्या नागरी सेवा व्यवस्थापित करा आणि अद्यतने मिळवा.
               </span>

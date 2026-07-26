@@ -1,6 +1,6 @@
 "use client";
 
-import { Droplet, Trash2, Map, Lightbulb, Dog, TreePine, Waves, Box, MoreHorizontal, Upload, Send, Save, CheckCircle, ArrowRight } from "lucide-react";
+import { Droplet, Trash2, Map, Lightbulb, Dog, TreePine, Waves, MoreHorizontal, Upload, Send, CheckCircle, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -17,13 +17,15 @@ export default function SubmitComplaint() {
   const router = useRouter();
 
   useEffect(() => {
-    setIsMounted(true);
-    const currentUser = getCurrentUser();
-    if (!currentUser) {
-      router.push("/login");
-    } else {
-      setUser(currentUser);
-    }
+    queueMicrotask(() => {
+      setIsMounted(true);
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        router.push("/login");
+      } else {
+        setUser(currentUser);
+      }
+    });
   }, [router]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

@@ -1,7 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
+// Prisma Schema for Shirol Nagar Seva (MySQL Database)
 
 generator client {
   provider = "prisma-client"
@@ -9,5 +6,57 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  role      String   // "admin", "mayor", "officer", "citizen"
+  uniqueId  String?  @unique
+  phone     String?
+  email     String?
+  ward      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Complaint {
+  id          String   @id @default(uuid())
+  date        String
+  citizenName String
+  category    String
+  description String   @db.Text
+  ward        String
+  status      String   @default("Pending") // "Pending", "In Progress", "Resolved"
+  assignedTo  String?
+  timeline    Json?    // Array of status history updates
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Department {
+  id          String   @id @default(uuid())
+  name        String
+  head        String
+  budget      String
+  activeStaff Int      @default(0)
+  icon        String   @default("Building")
+  status      String   @default("Active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model DepartmentEmployee {
+  id             String   @id @default(uuid())
+  name           String
+  departmentId   String
+  departmentName String
+  designation    String
+  email          String
+  phone          String
+  status         String   @default("Active")
+  joinedDate     String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
