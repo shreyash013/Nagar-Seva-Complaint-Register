@@ -23,9 +23,13 @@ import {
   X
 } from "lucide-react";
 import { login, Role, generateSystemUniqueId } from "@/lib/store";
+import { getAppMode } from "@/lib/config";
 
 export default function LoginPage() {
-  const [activeTab, setActiveTab] = useState<"official" | "citizen">("citizen");
+  const appMode = getAppMode();
+  const [activeTab, setActiveTab] = useState<"official" | "citizen">(
+    appMode === "admin" ? "official" : "citizen"
+  );
   const [citizenMode, setCitizenMode] = useState<"register" | "login">("register");
 
   // Citizen Form State
@@ -79,7 +83,7 @@ export default function LoginPage() {
       uniqueId: uniqueIdInput
     });
 
-    setSuccessMsg(`Authenticated as ${userName}! Redirecting to portal...`);
+    setSuccessMsg(`Authenticated as ${userName}! Redirecting...`);
 
     setTimeout(() => {
       if (role === "officer") {
@@ -202,46 +206,52 @@ export default function LoginPage() {
           </div>
           <h1 className="font-heading text-headline-md font-bold text-white">Shirol Nagar Parishad</h1>
           <p className="font-sans text-body-md text-primary-fixed mt-1 font-medium">
-            नागरी सेवा व शासन पोर्टल (Official Portal)
+            {appMode === "admin"
+              ? "नगरपरिषद अधिकारी पोर्टल (Official Staff Portal)"
+              : appMode === "citizen"
+              ? "नागरिक सेवेसाठी पोर्टल (Citizen Portal)"
+              : "नागरी सेवा व शासन पोर्टल (Official Portal)"}
           </p>
         </div>
 
-        {/* Tab Selection */}
-        <div className="grid grid-cols-2 bg-surface-container-high p-1.5 border-b border-outline-variant">
-          <button
-            type="button"
-            onClick={() => {
-              setActiveTab("citizen");
-              setError("");
-              setSuccessMsg("");
-            }}
-            className={`py-2.5 rounded-xl font-sans text-label-md font-bold flex items-center justify-center space-x-2 transition-all ${
-              activeTab === "citizen"
-                ? "bg-surface text-primary shadow-sm"
-                : "text-on-surface-variant hover:text-on-surface"
-            }`}
-          >
-            <User className="w-4 h-4" />
-            <span>Citizen Portal</span>
-          </button>
+        {/* Tab Selection (Only shown when appMode is "all") */}
+        {appMode === "all" && (
+          <div className="grid grid-cols-2 bg-surface-container-high p-1.5 border-b border-outline-variant">
+            <button
+              type="button"
+              onClick={() => {
+                setActiveTab("citizen");
+                setError("");
+                setSuccessMsg("");
+              }}
+              className={`py-2.5 rounded-xl font-sans text-label-md font-bold flex items-center justify-center space-x-2 transition-all ${
+                activeTab === "citizen"
+                  ? "bg-surface text-primary shadow-sm"
+                  : "text-on-surface-variant hover:text-on-surface"
+              }`}
+            >
+              <User className="w-4 h-4" />
+              <span>Citizen Portal</span>
+            </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              setActiveTab("official");
-              setError("");
-              setSuccessMsg("");
-            }}
-            className={`py-2.5 rounded-xl font-sans text-label-md font-bold flex items-center justify-center space-x-2 transition-all ${
-              activeTab === "official"
-                ? "bg-surface text-primary shadow-sm"
-                : "text-on-surface-variant hover:text-on-surface"
-            }`}
-          >
-            <Lock className="w-4 h-4" />
-            <span>Official / Admin Login</span>
-          </button>
-        </div>
+            <button
+              type="button"
+              onClick={() => {
+                setActiveTab("official");
+                setError("");
+                setSuccessMsg("");
+              }}
+              className={`py-2.5 rounded-xl font-sans text-label-md font-bold flex items-center justify-center space-x-2 transition-all ${
+                activeTab === "official"
+                  ? "bg-surface text-primary shadow-sm"
+                  : "text-on-surface-variant hover:text-on-surface"
+              }`}
+            >
+              <Lock className="w-4 h-4" />
+              <span>Official / Admin Login</span>
+            </button>
+          </div>
+        )}
 
         <div className="p-6 space-y-5">
           {/* Status Notifications */}
