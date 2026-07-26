@@ -71,26 +71,20 @@ export async function fetchRemoteComplaints() {
           // Smart merge: Map by Complaint ID
           const complaintMap = new Map<string, Complaint>();
 
-          // First populate remote items
+          // Remote list is authoritative: populate remote items first
           for (const item of remoteList) {
             if (item && item.id) {
               complaintMap.set(item.id, item);
             }
           }
 
-          // Merge local items so no locally submitted mobile ticket is lost
+          // Only keep local-only items that are not present on remote backend yet
           for (const item of localList) {
             if (item && item.id) {
-              const existing = complaintMap.get(item.id);
-              if (!existing) {
+              if (!complaintMap.has(item.id)) {
                 complaintMap.set(item.id, item);
                 // Push local-only complaint to remote backend API
                 syncToApi(item);
-              } else {
-                // If local version has updated status/timeline, keep latest timeline
-                if ((item.timeline?.length || 0) >= (existing.timeline?.length || 0)) {
-                  complaintMap.set(item.id, item);
-                }
               }
             }
           }
@@ -269,6 +263,7 @@ export function updateComplaintStatus(id: string, newStatus: "Pending" | "In Pro
       note: `Status updated to ${newStatus}`
     });
     saveComplaints(complaints);
+    syncToApi(complaints[index]);
     syncToApi({ action: "update_status", id, newStatus });
   }
 }
@@ -285,6 +280,7 @@ export function assignComplaint(id: string, officerName: string) {
       note: `Assigned to ${officerName}`
     });
     saveComplaints(complaints);
+    syncToApi(complaints[index]);
     syncToApi({ action: "assign", id, officerName });
   }
 }
