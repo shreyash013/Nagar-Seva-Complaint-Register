@@ -32,11 +32,57 @@ export function notifySync() {
   }
 }
 
+// Cross-domain API sync helpers for Netlify deployments
+async function syncToApi(payload: Record<string, unknown> | Complaint) {
+  if (typeof window === "undefined") return;
+  const targets = ["/api/complaints", "https://shirol-nagar-admin.netlify.app/api/complaints"];
+  for (const url of targets) {
+    try {
+      await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+    } catch {
+      // Ignore network errors
+    }
+  }
+}
+
+export async function fetchRemoteComplaints() {
+  if (typeof window === "undefined") return;
+  const targets = ["/api/complaints", "https://shirol-nagar-admin.netlify.app/api/complaints"];
+  for (const url of targets) {
+    try {
+      const res = await fetch(url);
+      if (res.ok) {
+        const remoteList: Complaint[] = await res.json();
+        if (Array.isArray(remoteList) && remoteList.length > 0) {
+          const current = localStorage.getItem(STORAGE_KEY);
+          if (JSON.stringify(remoteList) !== current) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteList));
+            notifySync();
+          }
+          break;
+        }
+      }
+    } catch {
+      // Ignore network errors
+    }
+  }
+}
+
 export function subscribeToSync(callback: () => void) {
   if (typeof window === "undefined") return () => {};
 
-  const handleMessage = () => callback();
-  const handleEvent = () => callback();
+  const handleMessage = () => {
+    callback();
+    fetchRemoteComplaints();
+  };
+  const handleEvent = () => {
+    callback();
+    fetchRemoteComplaints();
+  };
 
   if (syncChannel) {
     syncChannel.onmessage = handleMessage;
@@ -45,7 +91,11 @@ export function subscribeToSync(callback: () => void) {
   window.addEventListener("storage", handleEvent);
   window.addEventListener("focus", handleEvent);
 
-  const interval = setInterval(callback, 800);
+  fetchRemoteComplaints();
+  const interval = setInterval(() => {
+    callback();
+    fetchRemoteComplaints();
+  }, 1200);
 
   return () => {
     window.removeEventListener("smart_nagar_sync", handleEvent);
@@ -127,6 +177,7 @@ export function addComplaint(complaint: Complaint) {
   const complaints = getComplaints();
   complaints.unshift(complaint);
   saveComplaints(complaints);
+  syncToApi(complaint);
 }
 
 export function updateComplaintStatus(id: string, newStatus: "Pending" | "In Progress" | "Resolved") {
@@ -140,6 +191,7 @@ export function updateComplaintStatus(id: string, newStatus: "Pending" | "In Pro
       note: `Status updated to ${newStatus}`
     });
     saveComplaints(complaints);
+    syncToApi({ action: "update_status", id, newStatus });
   }
 }
 
@@ -155,6 +207,7 @@ export function assignComplaint(id: string, officerName: string) {
       note: `Assigned to ${officerName}`
     });
     saveComplaints(complaints);
+    syncToApi({ action: "assign", id, officerName });
   }
 }
 

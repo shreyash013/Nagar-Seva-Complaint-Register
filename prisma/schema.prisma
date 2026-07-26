@@ -28,6 +28,8 @@ model Complaint {
   category    String
   description String   @db.Text
   ward        String
+  area        String?
+  image       String?  @db.LongText
   status      String   @default("Pending") // "Pending", "In Progress", "Resolved"
   assignedTo  String?
   timeline    Json?    // Array of status history updates
