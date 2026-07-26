@@ -3,7 +3,7 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState, useEffect, Suspense } from "react";
 import { Search, Check } from "lucide-react";
-import { getComplaints, Complaint } from "@/lib/store";
+import { getComplaints, subscribeToSync, Complaint } from "@/lib/store";
 
 function TrackComplaintsContent() {
   const searchParams = useSearchParams();
@@ -17,6 +17,14 @@ function TrackComplaintsContent() {
     queueMicrotask(() => {
       setComplaints(getComplaints());
     });
+
+    const unsubscribe = subscribeToSync(() => {
+      setComplaints(getComplaints());
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const handleSearch = (e: React.FormEvent) => {

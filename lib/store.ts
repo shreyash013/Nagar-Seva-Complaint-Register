@@ -35,7 +35,11 @@ export function notifySync() {
 // Cross-domain API sync helpers for Netlify deployments
 async function syncToApi(payload: Record<string, unknown> | Complaint) {
   if (typeof window === "undefined") return;
-  const targets = ["/api/complaints", "https://shirol-nagar-admin.netlify.app/api/complaints"];
+  const targets = [
+    "/api/complaints",
+    "https://shirol-nagar-admin.netlify.app/api/complaints",
+    "https://shirol-nagar-citizen.netlify.app/api/complaints"
+  ];
   for (const url of targets) {
     try {
       await fetch(url, {
@@ -51,7 +55,11 @@ async function syncToApi(payload: Record<string, unknown> | Complaint) {
 
 export async function fetchRemoteComplaints() {
   if (typeof window === "undefined") return;
-  const targets = ["/api/complaints", "https://shirol-nagar-admin.netlify.app/api/complaints"];
+  const targets = [
+    "/api/complaints",
+    "https://shirol-nagar-admin.netlify.app/api/complaints",
+    "https://shirol-nagar-citizen.netlify.app/api/complaints"
+  ];
   for (const url of targets) {
     try {
       const res = await fetch(url);
