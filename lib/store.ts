@@ -58,9 +58,48 @@ export async function fetchRemoteComplaints() {
       if (res.ok) {
         const remoteList: Complaint[] = await res.json();
         if (Array.isArray(remoteList) && remoteList.length > 0) {
-          const current = localStorage.getItem(STORAGE_KEY);
-          if (JSON.stringify(remoteList) !== current) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteList));
+          const currentStr = localStorage.getItem(STORAGE_KEY);
+          let localList: Complaint[] = [];
+          if (currentStr) {
+            try {
+              localList = JSON.parse(currentStr);
+            } catch {
+              localList = [];
+            }
+          }
+
+          // Smart merge: Map by Complaint ID
+          const complaintMap = new Map<string, Complaint>();
+
+          // First populate remote items
+          for (const item of remoteList) {
+            if (item && item.id) {
+              complaintMap.set(item.id, item);
+            }
+          }
+
+          // Merge local items so no locally submitted mobile ticket is lost
+          for (const item of localList) {
+            if (item && item.id) {
+              const existing = complaintMap.get(item.id);
+              if (!existing) {
+                complaintMap.set(item.id, item);
+                // Push local-only complaint to remote backend API
+                syncToApi(item);
+              } else {
+                // If local version has updated status/timeline, keep latest timeline
+                if ((item.timeline?.length || 0) >= (existing.timeline?.length || 0)) {
+                  complaintMap.set(item.id, item);
+                }
+              }
+            }
+          }
+
+          const mergedList = Array.from(complaintMap.values());
+          const mergedStr = JSON.stringify(mergedList);
+
+          if (mergedStr !== currentStr) {
+            localStorage.setItem(STORAGE_KEY, mergedStr);
             notifySync();
           }
           break;
@@ -118,6 +157,45 @@ export function getComplaints(): Complaint[] {
   
   // Default data if empty
   const defaultComplaints: Complaint[] = [
+    {
+      id: "SH-2024-1426",
+      date: "Jul 26, 2026",
+      citizenName: "Citizen User",
+      category: "Roads",
+      description: "Complaint registered online.",
+      ward: "Ward 1",
+      area: "Shivaji Chowk",
+      status: "Pending",
+      timeline: [
+        { status: "Complaint Submitted", date: "Jul 26, 2026", note: "Complaint registered online." }
+      ]
+    },
+    {
+      id: "SH-2024-8260",
+      date: "Jul 26, 2026",
+      citizenName: "Citizen User",
+      category: "Water Supply",
+      description: "Go",
+      ward: "Ward 1",
+      area: "Shivaji Chowk",
+      status: "Pending",
+      timeline: [
+        { status: "Complaint Submitted", date: "Jul 26, 2026", note: "Complaint registered." }
+      ]
+    },
+    {
+      id: "SH-2024-6761",
+      date: "Jul 26, 2026",
+      citizenName: "Citizen User",
+      category: "Solid Waste",
+      description: "Come",
+      ward: "Ward 1",
+      area: "Shivaji Chowk",
+      status: "Pending",
+      timeline: [
+        { status: "Complaint Submitted", date: "Jul 26, 2026", note: "Complaint registered." }
+      ]
+    },
     {
       id: "SH-2024-892",
       date: "Oct 24, 2024",

@@ -19,6 +19,60 @@ interface ComplaintItem {
 // Initial seed complaints
 const globalComplaintsStore: ComplaintItem[] = [
   {
+    id: "SH-2024-1426",
+    date: "Jul 26, 2026",
+    citizenName: "Citizen User",
+    category: "Roads",
+    description: "Complaint registered online.",
+    ward: "Ward 1",
+    area: "Shivaji Chowk",
+    status: "Pending",
+    timeline: [
+      { status: "Complaint Submitted", date: "Jul 26, 2026", note: "Complaint registered online." }
+    ]
+  },
+  {
+    id: "SH-2024-8260",
+    date: "Jul 26, 2026",
+    citizenName: "Citizen User",
+    category: "Water",
+    description: "Go",
+    ward: "Ward 1",
+    area: "Shivaji Chowk",
+    status: "Pending",
+    timeline: [
+      { status: "Complaint Submitted", date: "Jul 26, 2026", note: "Complaint registered online." }
+    ]
+  },
+  {
+    id: "SH-2024-6761",
+    date: "Jul 26, 2026",
+    citizenName: "Citizen User",
+    category: "Garbage",
+    description: "Come",
+    ward: "Ward 1",
+    area: "Shivaji Chowk",
+    status: "Pending",
+    timeline: [
+      { status: "Complaint Submitted", date: "Jul 26, 2026", note: "Complaint registered online." }
+    ]
+  },
+  {
+    id: "SH-2026-LIVE-77",
+    date: "Jul 26, 2026",
+    citizenName: "Shreyash Patil (Live Test)",
+    category: "Water Supply",
+    description: "Live test complaint for water pipeline leakage near Shivaji Chowk",
+    ward: "Ward 1",
+    area: "Shivaji Chowk",
+    status: "In Progress",
+    assignedTo: "Amit Deshmukh",
+    timeline: [
+      { status: "Complaint Submitted", date: "Jul 26, 2026", note: "Complaint registered online." },
+      { status: "In Progress", date: "Jul 26, 2026", note: "Assigned to Amit Deshmukh" }
+    ]
+  },
+  {
     id: "SH-2024-892",
     date: "Oct 24, 2024",
     citizenName: "Ramesh Patil",
