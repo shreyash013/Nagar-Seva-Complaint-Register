@@ -1,6 +1,6 @@
 "use client";
 
-import { Droplet, Trash2, Map, Lightbulb, Dog, TreePine, Waves, MoreHorizontal, Upload, Send, CheckCircle, ArrowRight } from "lucide-react";
+import { Droplet, Trash2, Map, Lightbulb, Dog, TreePine, Waves, MoreHorizontal, Upload, Send, CheckCircle, ArrowRight, Image as ImageIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,6 +14,8 @@ export default function SubmitComplaint() {
   const [isMounted, setIsMounted] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [imagePreview, setImagePreview] = useState<string>("");
+  const [descriptionText, setDescriptionText] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -28,6 +30,20 @@ export default function SubmitComplaint() {
     });
   }, [router]);
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const files = Array.from(e.target.files);
+      setSelectedFiles(files);
+      
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -36,9 +52,9 @@ export default function SubmitComplaint() {
     const category = formData.get("category") as string;
     const ward = formData.get("ward") as string;
     const description = formData.get("description") as string;
-    const citizenName = formData.get("citizenName") as string || "Anonymous Citizen";
+    const area = formData.get("area") as string;
+    const citizenName = (formData.get("citizenName") as string) || user?.name || "Anonymous Citizen";
     
-    // Simulate API call
     setTimeout(() => {
       const generatedId = `SH-2024-${Math.floor(1000 + Math.random() * 9000)}`;
       
@@ -49,6 +65,8 @@ export default function SubmitComplaint() {
         category: category.charAt(0).toUpperCase() + category.slice(1).replace("_", " "),
         description: description,
         ward: `Ward ${ward}`,
+        area: area,
+        image: imagePreview || undefined,
         status: "Pending",
         timeline: [
           { status: "Complaint Submitted", date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }), note: "Complaint registered online." }
@@ -60,7 +78,7 @@ export default function SubmitComplaint() {
       setTrackingId(generatedId);
       setIsSubmitting(false);
       setShowSuccessModal(true);
-    }, 1500);
+    }, 800);
   };
 
   if (!isMounted || !user) {
@@ -202,19 +220,19 @@ export default function SubmitComplaint() {
                 <input name="citizenName" defaultValue={user.name} required className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-sans text-body-md" placeholder="Enter your full name" type="text" />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="font-sans text-label-md text-on-surface font-semibold">Ward Number <span className="text-error">*</span></label>
+                <label className="font-sans text-label-md text-on-surface font-semibold">Ward Number (प्रभाग क्रमांक) <span className="text-error">*</span></label>
                 <select name="ward" defaultValue="" required className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-sans text-body-md">
                   <option disabled value="">Select Ward</option>
-                  <option value="1">Ward 1 - Shivaji Chowk Area</option>
-                  <option value="2">Ward 2 - Market Yard</option>
-                  <option value="3">Ward 3 - Station Road</option>
-                  <option value="4">Ward 4 - Gavbhag</option>
-                  <option value="5">Ward 5</option>
-                  <option value="6">Ward 6</option>
-                  <option value="7">Ward 7</option>
-                  <option value="8">Ward 8</option>
-                  <option value="9">Ward 9</option>
-                  <option value="10">Ward 10</option>
+                  <option value="1">Ward 1 - Shivaji Chowk Area (प्रभाग १)</option>
+                  <option value="2">Ward 2 - Market Yard Area (प्रभाग २)</option>
+                  <option value="3">Ward 3 - Station Road Area (प्रभाग ३)</option>
+                  <option value="4">Ward 4 - Gavbhag Main Area (प्रभाग ४)</option>
+                  <option value="5">Ward 5 - Datta Mandir Area (प्रभाग ५)</option>
+                  <option value="6">Ward 6 - Industrial Estate Area (प्रभाग ६)</option>
+                  <option value="7">Ward 7 - Subhash Nagar Area (प्रभाग ७)</option>
+                  <option value="8">Ward 8 - Riverfront Road Area (प्रभाग ८)</option>
+                  <option value="9">Ward 9 - Sangli Road Colony (प्रभाग ९)</option>
+                  <option value="10">Ward 10 - New Extension Area (प्रभाग १०)</option>
                 </select>
               </div>
               <div className="flex flex-col gap-2 md:col-span-2">
@@ -229,8 +247,22 @@ export default function SubmitComplaint() {
             <h2 className="font-heading text-title-md text-on-surface mb-4 font-bold">3. Complaint Description <span className="text-on-surface-variant font-sans text-body-md ml-2 font-normal">तक्रार वर्णन</span></h2>
             <div className="flex flex-col gap-2">
               <label className="font-sans text-label-md text-on-surface font-semibold">Detailed Information <span className="text-error">*</span></label>
-              <textarea name="description" required className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-sans text-body-md resize-none" placeholder="Please describe the issue in detail..." rows={4}></textarea>
-              <p className="font-sans text-label-sm text-on-surface-variant text-right">0/500 characters</p>
+              <textarea 
+                name="description" 
+                required 
+                maxLength={500}
+                value={descriptionText}
+                onChange={(e) => setDescriptionText(e.target.value)}
+                className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-sans text-body-md resize-none" 
+                placeholder="Please describe the issue in detail..." 
+                rows={4}
+              ></textarea>
+              <div className="flex justify-between items-center font-sans text-label-sm">
+                <span className="text-on-surface-variant">Min. 10 characters required</span>
+                <span className={`font-bold ${descriptionText.length >= 500 ? "text-error" : descriptionText.length > 0 ? "text-primary" : "text-on-surface-variant"}`}>
+                  {descriptionText.length} / 500 characters
+                </span>
+              </div>
             </div>
           </section>
         </div>
@@ -239,30 +271,36 @@ export default function SubmitComplaint() {
         <div className="md:col-span-4 flex flex-col gap-stack-md">
           {/* Photo Upload */}
           <section className="bg-surface rounded-xl border border-outline-variant p-6 flex-grow flex flex-col">
-            <h2 className="font-heading text-title-md text-on-surface mb-4 font-bold">4. Evidence (Optional) <span className="text-on-surface-variant font-sans text-body-md ml-2 font-normal">पुरावा</span></h2>
-            <label className="border-2 border-dashed border-outline-variant rounded-xl flex-grow flex flex-col items-center justify-center p-6 bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer text-center group">
+            <h2 className="font-heading text-title-md text-on-surface mb-4 font-bold">4. Evidence (Photo Upload) <span className="text-on-surface-variant font-sans text-body-md ml-2 font-normal">फोटो पुरावा</span></h2>
+            <label className="border-2 border-dashed border-outline-variant rounded-xl flex-grow flex flex-col items-center justify-center p-6 bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer text-center group relative overflow-hidden">
               <input 
                 type="file" 
                 name="evidence" 
                 className="hidden" 
-                accept="image/png, image/jpeg, image/gif, image/svg+xml" 
-                multiple 
-                onChange={(e) => {
-                  if (e.target.files) {
-                    setSelectedFiles(Array.from(e.target.files));
-                  }
-                }}
+                accept="image/*" 
+                onChange={handleFileChange}
               />
-              <Upload className="text-outline-variant group-hover:text-primary mb-2 w-12 h-12" />
-              <p className="font-sans text-label-md text-on-surface mb-1 font-semibold">Click to upload or drag and drop</p>
-              <p className="font-sans text-label-sm text-on-surface-variant">SVG, PNG, JPG or GIF (max. 5MB)</p>
-              <span className="mt-4 px-4 py-2 bg-surface text-primary border border-outline-variant rounded-lg font-sans text-label-md hover:bg-surface-container-lowest transition-colors font-semibold">Select Files</span>
-              {selectedFiles.length > 0 && (
+              {imagePreview ? (
+                <div className="w-full h-full flex flex-col items-center justify-center space-y-2">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={imagePreview} alt="Uploaded evidence" className="w-full h-40 object-cover rounded-lg shadow-sm border border-outline-variant" />
+                  <p className="font-sans text-label-xs text-primary font-bold flex items-center gap-1">
+                    <ImageIcon className="w-3.5 h-3.5" />
+                    Image Attached (Click to replace)
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <Upload className="text-outline-variant group-hover:text-primary mb-2 w-12 h-12" />
+                  <p className="font-sans text-label-md text-on-surface mb-1 font-semibold">Click to upload photo evidence</p>
+                  <p className="font-sans text-label-sm text-on-surface-variant">JPG, PNG, GIF (max. 5MB)</p>
+                  <span className="mt-4 px-4 py-2 bg-surface text-primary border border-outline-variant rounded-lg font-sans text-label-md hover:bg-surface-container-lowest transition-colors font-semibold">Select Photo</span>
+                </>
+              )}
+
+              {selectedFiles.length > 0 && !imagePreview && (
                 <div className="mt-4 text-left w-full max-w-[200px]">
-                  <p className="font-sans text-label-sm text-on-surface-variant mb-1 font-semibold">Selected Files:</p>
-                  <ul className="text-sm font-sans text-on-surface truncate">
-                    {selectedFiles.map((f, i) => <li key={i} className="truncate">{f.name}</li>)}
-                  </ul>
+                  <p className="font-sans text-label-sm text-on-surface-variant mb-1 font-semibold font-mono">{selectedFiles[0].name}</p>
                 </div>
               )}
             </label>
@@ -291,9 +329,6 @@ export default function SubmitComplaint() {
                     Submit Complaint
                   </>
                 )}
-              </button>
-              <button className="w-full bg-transparent text-primary py-3 rounded-lg font-sans text-label-md border border-outline-variant hover:bg-surface-container transition-colors font-semibold" type="button">
-                Save as Draft
               </button>
             </div>
           </section>

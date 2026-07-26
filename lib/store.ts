@@ -5,6 +5,8 @@ export interface Complaint {
   category: string;
   description: string;
   ward: string;
+  area?: string;
+  image?: string;
   status: "Pending" | "In Progress" | "Resolved";
   assignedTo?: string;
   timeline: { status: string; date: string; note: string }[];

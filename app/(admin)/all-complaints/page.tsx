@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Search, Filter, SortAsc, Edit, Eye, UserPlus, X } from "lucide-react";
+import { Search, Filter, SortAsc, Eye, UserPlus, X, Image as ImageIcon } from "lucide-react";
 import {
   getComplaints,
   updateComplaintStatus,
@@ -32,6 +32,22 @@ export default function AllComplaints() {
       setComplaints(getComplaints());
       setEmployees(getDepartmentEmployees());
     });
+
+    // Real-time synchronization listener & polling
+    const refreshData = () => {
+      setComplaints(getComplaints());
+      setEmployees(getDepartmentEmployees());
+    };
+
+    window.addEventListener("storage", refreshData);
+    window.addEventListener("focus", refreshData);
+    const interval = setInterval(refreshData, 1500);
+
+    return () => {
+      window.removeEventListener("storage", refreshData);
+      window.removeEventListener("focus", refreshData);
+      clearInterval(interval);
+    };
   }, []);
 
   const updateStatus = (id: string, newStatus: "Pending" | "In Progress" | "Resolved") => {
@@ -115,9 +131,11 @@ export default function AllComplaints() {
               </div>
               <div className="bg-surface-container-low p-4 rounded-lg">
                 <p className="font-sans text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">
-                  Ward
+                  Ward & Area
                 </p>
-                <p className="font-sans text-body-md font-semibold text-on-surface">{viewComplaint.ward}</p>
+                <p className="font-sans text-body-md font-semibold text-on-surface">
+                  {viewComplaint.ward} {viewComplaint.area ? `(${viewComplaint.area})` : ""}
+                </p>
               </div>
               <div className="bg-surface-container-low p-4 rounded-lg">
                 <p className="font-sans text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">
@@ -141,6 +159,24 @@ export default function AllComplaints() {
                 {viewComplaint.description}
               </p>
             </div>
+
+            {/* Uploaded Photo Evidence */}
+            {viewComplaint.image && (
+              <div className="mb-6">
+                <p className="font-sans text-label-sm text-on-surface-variant uppercase tracking-wider mb-2 font-semibold flex items-center gap-1.5">
+                  <ImageIcon className="w-4 h-4 text-primary" />
+                  Uploaded Photo Evidence (नागरिकाचा फोटो पुरावा)
+                </p>
+                <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-3 flex justify-center bg-black/5">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={viewComplaint.image}
+                    alt="Citizen Uploaded Evidence"
+                    className="max-h-72 w-auto object-contain rounded-lg shadow-sm border border-outline-variant"
+                  />
+                </div>
+              </div>
+            )}
 
             <div>
               <p className="font-sans text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">
@@ -178,34 +214,36 @@ export default function AllComplaints() {
             <p className="font-sans text-body-md text-on-surface-variant mb-4">
               Assign complaint <strong>{assignModalData.id}</strong> ({assignModalData.category}) to a department employee.
             </p>
+
             <div className="mb-6">
-              <label className="block font-sans text-label-sm text-on-surface-variant mb-2">
-                Select Department Employee
+              <label className="block font-sans text-label-md text-on-surface font-semibold mb-2">
+                Select Department Officer / Staff *
               </label>
               <select
                 value={selectedOfficer}
                 onChange={(e) => setSelectedOfficer(e.target.value)}
-                className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 font-sans text-body-md font-medium"
+                className="w-full bg-surface border border-outline-variant rounded-xl p-3 font-sans text-body-md focus:outline-none focus:border-primary"
               >
-                <option value="">-- Choose Employee --</option>
+                <option value="">-- Choose Officer --</option>
                 {employees.map((emp) => (
-                  <option key={emp.id} value={`${emp.name} (${emp.departmentName})`}>
-                    {emp.name} — {emp.designation} [{emp.departmentName}]
+                  <option key={emp.id} value={emp.name}>
+                    {emp.name} ({emp.departmentName} - {emp.designation})
                   </option>
                 ))}
               </select>
             </div>
-            <div className="flex justify-end gap-2">
+
+            <div className="flex justify-end space-x-3">
               <button
                 onClick={() => setAssignModalData(null)}
-                className="px-4 py-2 text-on-surface-variant font-sans font-semibold rounded-lg hover:bg-surface-container-low"
+                className="px-4 py-2 bg-transparent text-on-surface-variant hover:bg-surface-container-high rounded-xl font-sans text-label-md font-semibold transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleAssign}
                 disabled={!selectedOfficer}
-                className="px-4 py-2 bg-primary text-on-primary font-sans font-semibold rounded-lg hover:bg-primary-container disabled:opacity-50"
+                className="px-5 py-2 bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container disabled:opacity-50 rounded-xl font-sans text-label-md font-bold transition-colors shadow-sm"
               >
                 Assign Task
               </button>
@@ -214,175 +252,167 @@ export default function AllComplaints() {
         </div>
       )}
 
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-stack-lg gap-stack-md pt-4 md:pt-0">
+      {/* Header Title */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-stack-md">
         <div>
-          <h2 className="font-heading text-headline-lg-mobile md:text-headline-lg text-primary mb-2 font-bold">
-            All Complaints
-          </h2>
+          <h1 className="font-heading text-headline-md font-bold text-on-surface">
+            {isAdmin ? "Central Complaints Console (Master Admin)" : isMayor ? "Nagaradhyaksh Complaints Directory" : "Complaints Directory"}
+          </h1>
           <p className="font-sans text-body-md text-on-surface-variant">
-            Central management console to monitor, assign, and update all registered civic issues.
+            Manage, filter, assign, and update status of all municipal citizen complaints in real-time.
           </p>
+        </div>
+
+        <div className="flex items-center space-x-2 bg-surface-container-low px-4 py-2 rounded-xl border border-outline-variant">
+          <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span>
+          <span className="font-sans text-label-sm font-semibold text-on-surface">Live Real-time Sync Active</span>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-surface border border-outline-variant rounded-xl p-4 mb-stack-md shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
-        <div className="relative w-full md:max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-outline w-5 h-5" />
+      <div className="bg-surface rounded-xl border border-outline-variant p-4 mb-6 shadow-sm flex flex-col md:flex-row gap-4 justify-between items-center">
+        <div className="relative w-full md:w-96">
           <input
             type="text"
-            placeholder="Search by ID, Citizen, or Keyword..."
+            placeholder="Search by ID, Citizen, Description..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-surface-container-low border border-outline-variant rounded-lg pl-10 pr-4 py-2 font-sans text-body-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-on-surface"
+            className="w-full bg-surface-container-low border border-outline-variant rounded-xl pl-10 pr-4 py-2.5 font-sans text-body-md focus:outline-none focus:border-primary"
           />
+          <Search className="w-4 h-4 text-on-surface-variant absolute left-3.5 top-3.5" />
         </div>
-        <div className="flex w-full md:w-auto gap-3">
-          <div className="relative flex-1 md:flex-none">
+
+        <div className="flex flex-wrap items-center gap-3 w-full md:w-auto justify-end">
+          <div className="flex items-center space-x-2">
+            <Filter className="w-4 h-4 text-on-surface-variant" />
             <select
               value={filterWard}
               onChange={(e) => setFilterWard(e.target.value)}
-              className="w-full appearance-none bg-surface-container-low border border-outline-variant text-on-surface py-2 pl-4 pr-10 rounded-lg font-sans text-label-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-medium"
+              className="bg-surface-container-low border border-outline-variant rounded-xl px-3 py-2 font-sans text-label-md font-medium text-on-surface focus:outline-none focus:border-primary"
             >
-              <option value="">All Wards</option>
+              <option value="">All Wards (प्रभाग १ ते १०)</option>
               <option value="Ward 1">Ward 1</option>
+              <option value="Ward 2">Ward 2</option>
+              <option value="Ward 3">Ward 3</option>
               <option value="Ward 4">Ward 4</option>
+              <option value="Ward 5">Ward 5</option>
+              <option value="Ward 6">Ward 6</option>
               <option value="Ward 7">Ward 7</option>
+              <option value="Ward 8">Ward 8</option>
+              <option value="Ward 9">Ward 9</option>
+              <option value="Ward 10">Ward 10</option>
             </select>
-            <Filter className="absolute right-3 top-2.5 text-on-surface-variant w-4 h-4 pointer-events-none" />
           </div>
-          <div className="relative flex-1 md:flex-none">
+
+          <div className="flex items-center space-x-2">
+            <SortAsc className="w-4 h-4 text-on-surface-variant" />
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="w-full appearance-none bg-surface-container-low border border-outline-variant text-on-surface py-2 pl-4 pr-10 rounded-lg font-sans text-label-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-medium"
+              className="bg-surface-container-low border border-outline-variant rounded-xl px-3 py-2 font-sans text-label-md font-medium text-on-surface focus:outline-none focus:border-primary"
             >
               <option value="">All Statuses</option>
               <option value="Pending">Pending</option>
               <option value="In Progress">In Progress</option>
               <option value="Resolved">Resolved</option>
             </select>
-            <SortAsc className="absolute right-3 top-2.5 text-on-surface-variant w-4 h-4 pointer-events-none" />
           </div>
         </div>
       </div>
 
       {/* Complaints Table */}
-      <div className="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+      <div className="bg-surface rounded-xl border border-outline-variant shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse min-w-[800px]">
+          <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-surface-container-low border-b border-outline-variant font-sans text-label-sm text-on-surface-variant">
-                <th className="py-4 px-6 font-semibold">Complaint ID</th>
-                <th className="py-4 px-6 font-semibold">Date & Citizen</th>
-                <th className="py-4 px-6 font-semibold">Category / Issue</th>
-                <th className="py-4 px-6 font-semibold">Ward</th>
-                <th className="py-4 px-6 font-semibold">Status</th>
-                <th className="py-4 px-6 font-semibold">Assigned To</th>
-                <th className="py-4 px-6 font-semibold text-right">Actions</th>
+              <tr className="bg-surface-container-low border-b border-outline-variant font-sans text-label-md text-on-surface-variant">
+                <th className="p-4 font-semibold">Complaint ID</th>
+                <th className="p-4 font-semibold">Citizen Name</th>
+                <th className="p-4 font-semibold">Category</th>
+                <th className="p-4 font-semibold">Ward</th>
+                <th className="p-4 font-semibold">Photo</th>
+                <th className="p-4 font-semibold">Status</th>
+                <th className="p-4 font-semibold">Assigned Staff</th>
+                <th className="p-4 font-semibold text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="font-sans text-body-md text-on-surface divide-y divide-outline-variant/50">
+            <tbody className="divide-y divide-outline-variant font-sans text-body-md">
               {filteredComplaints.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-8 text-center text-on-surface-variant">
-                    No complaints match your filters or assigned tasks.
+                  <td colSpan={8} className="p-8 text-center text-on-surface-variant">
+                    No complaints found matching filters.
                   </td>
                 </tr>
               ) : (
-                filteredComplaints.map((complaint) => (
-                  <tr key={complaint.id} className="hover:bg-surface-container-lowest transition-colors group">
-                    <td className="py-4 px-6 font-sans text-label-md font-medium text-primary">{complaint.id}</td>
-                    <td className="py-4 px-6">
-                      <div className="font-medium text-on-surface">{complaint.date}</div>
-                      <div className="text-label-sm text-on-surface-variant">{complaint.citizenName}</div>
-                    </td>
-                    <td className="py-4 px-6">
-                      <div className="font-medium text-on-surface">{complaint.category}</div>
-                      <div className="text-label-sm text-on-surface-variant truncate max-w-[200px]">
-                        {complaint.description}
-                      </div>
-                    </td>
-                    <td className="py-4 px-6">{complaint.ward}</td>
-                    <td className="py-4 px-6">
-                      {isMayor ? (
-                        <span
-                          className={`inline-block border text-label-sm font-semibold rounded-full px-3 py-1 text-center ${getStatusColor(
-                            complaint.status
-                          )}`}
+                filteredComplaints.map((c) => (
+                  <tr key={c.id} className="hover:bg-surface-container-low/50 transition-colors">
+                    <td className="p-4 font-mono font-bold text-primary">{c.id}</td>
+                    <td className="p-4 font-semibold text-on-surface">{c.citizenName}</td>
+                    <td className="p-4 text-on-surface-variant">{c.category}</td>
+                    <td className="p-4 text-on-surface-variant">{c.ward}</td>
+                    <td className="p-4">
+                      {c.image ? (
+                        <button
+                          onClick={() => setViewComplaint(c)}
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary font-sans text-label-xs font-bold transition-all border border-primary/20"
+                          title="View uploaded photo evidence"
                         >
-                          {complaint.status}
+                          <ImageIcon className="w-3.5 h-3.5" />
+                          View Photo
+                        </button>
+                      ) : (
+                        <span className="text-on-surface-variant text-label-xs font-mono">No Image</span>
+                      )}
+                    </td>
+                    <td className="p-4">
+                      <select
+                        value={c.status}
+                        onChange={(e) =>
+                          updateStatus(c.id, e.target.value as "Pending" | "In Progress" | "Resolved")
+                        }
+                        className={`px-3 py-1 rounded-full text-xs font-bold border focus:outline-none cursor-pointer ${getStatusColor(
+                          c.status
+                        )}`}
+                      >
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved</option>
+                      </select>
+                    </td>
+                    <td className="p-4 text-on-surface-variant font-medium">
+                      {c.assignedTo ? (
+                        <span className="text-on-surface font-semibold flex items-center gap-1">
+                          👤 {c.assignedTo}
                         </span>
                       ) : (
-                        <select
-                          value={complaint.status}
-                          onChange={(e) =>
-                            updateStatus(complaint.id, e.target.value as "Pending" | "In Progress" | "Resolved")
-                          }
-                          className={`border text-label-sm font-semibold rounded-full px-3 py-1 focus:outline-none focus:ring-1 appearance-none cursor-pointer text-center ${getStatusColor(
-                            complaint.status
-                          )}`}
-                        >
-                          <option value="Pending">Pending</option>
-                          <option value="In Progress">In Progress</option>
-                          <option value="Resolved">Resolved</option>
-                        </select>
+                        <span className="text-amber-600 italic">Unassigned</span>
                       )}
                     </td>
-                    <td className="py-4 px-6">
-                      {complaint.assignedTo && complaint.assignedTo !== "Assign" ? (
-                        <div className="text-label-sm font-medium">{complaint.assignedTo}</div>
-                      ) : !isMayor ? (
-                        <button
-                          onClick={() => setAssignModalData(complaint)}
-                          className="flex items-center gap-1 text-primary hover:text-primary-container text-label-sm font-medium bg-primary/5 px-2 py-1 rounded"
-                        >
-                          <UserPlus className="w-3 h-3" /> Assign
-                        </button>
-                      ) : (
-                        <div className="text-label-sm text-on-surface-variant italic">Unassigned</div>
-                      )}
-                    </td>
-                    <td className="py-4 px-6 text-right">
-                      <div className="flex justify-end gap-2">
-                        <button
-                          onClick={() => setViewComplaint(complaint)}
-                          className="p-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded transition-colors"
-                          title="View Details"
-                        >
-                          <Eye className="w-4 h-4" />
-                        </button>
-                        {isAdmin && (
-                          <button
-                            className="p-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded transition-colors"
-                            title="Edit"
-                          >
-                            <Edit className="w-4 h-4" />
-                          </button>
-                        )}
-                      </div>
+                    <td className="p-4 text-right space-x-2">
+                      <button
+                        onClick={() => setViewComplaint(c)}
+                        className="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container rounded-lg transition-colors"
+                        title="View Details & Photo"
+                      >
+                        <Eye className="w-4 h-4" />
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          setAssignModalData(c);
+                          setSelectedOfficer(c.assignedTo || "");
+                        }}
+                        className="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container rounded-lg transition-colors"
+                        title="Assign Department Employee"
+                      >
+                        <UserPlus className="w-4 h-4" />
+                      </button>
                     </td>
                   </tr>
                 ))
               )}
             </tbody>
           </table>
-        </div>
-
-        {/* Pagination Placeholder */}
-        <div className="p-4 border-t border-outline-variant flex justify-between items-center bg-surface-container-low text-label-sm text-on-surface-variant">
-          <div>Showing {filteredComplaints.length} complaints</div>
-          <div className="flex gap-1">
-            <button
-              className="px-3 py-1 rounded border border-outline-variant bg-surface hover:bg-surface-container-high transition-colors disabled:opacity-50"
-              disabled
-            >
-              Previous
-            </button>
-            <button className="px-3 py-1 rounded border border-outline-variant bg-surface hover:bg-surface-container-high transition-colors">
-              Next
-            </button>
-          </div>
         </div>
       </div>
     </main>

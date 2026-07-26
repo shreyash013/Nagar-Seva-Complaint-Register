@@ -360,6 +360,9 @@ export default function LoginPage() {
                           <option value="Ward 5">Ward 5 (प्रभाग ५)</option>
                           <option value="Ward 6">Ward 6 (प्रभाग ६)</option>
                           <option value="Ward 7">Ward 7 (प्रभाग ७)</option>
+                          <option value="Ward 8">Ward 8 (प्रभाग ८)</option>
+                          <option value="Ward 9">Ward 9 (प्रभाग ९)</option>
+                          <option value="Ward 10">Ward 10 (प्रभाग १०)</option>
                         </select>
                         <Building className="w-4 h-4 text-on-surface-variant absolute left-3 top-3.5" />
                       </div>
