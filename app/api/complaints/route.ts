@@ -118,6 +118,35 @@ const globalComplaintsStore: ComplaintItem[] = [
   }
 ];
 
+const CLOUD_STORE_URL = "https://jsonblob.com/api/jsonBlob/019f9f24-be19-7e68-9053-367a244ba7bd";
+
+async function getCloudComplaints(): Promise<ComplaintItem[]> {
+  try {
+    const res = await fetch(CLOUD_STORE_URL, { cache: "no-store" });
+    if (res.ok) {
+      const data: ComplaintItem[] = await res.json();
+      if (Array.isArray(data) && data.length > 0) {
+        return data;
+      }
+    }
+  } catch (e) {
+    console.error("Failed to read from cloud store", e);
+  }
+  return globalComplaintsStore;
+}
+
+async function saveCloudComplaints(list: ComplaintItem[]) {
+  try {
+    await fetch(CLOUD_STORE_URL, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(list)
+    });
+  } catch (e) {
+    console.error("Failed to save to cloud store", e);
+  }
+}
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -129,7 +158,8 @@ export async function OPTIONS() {
 }
 
 export async function GET() {
-  return NextResponse.json(globalComplaintsStore, {
+  const complaints = await getCloudComplaints();
+  return NextResponse.json(complaints, {
     status: 200,
     headers: corsHeaders,
   });
@@ -138,9 +168,11 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+    const currentList = await getCloudComplaints();
+
     if (body.action === "update_status") {
       const { id, newStatus } = body;
-      const item = globalComplaintsStore.find((c) => c.id === id);
+      const item = currentList.find((c) => c.id === id);
       if (item) {
         item.status = newStatus;
         item.timeline.push({
@@ -148,13 +180,14 @@ export async function POST(req: Request) {
           date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
           note: `Status updated to ${newStatus}`
         });
+        await saveCloudComplaints(currentList);
       }
-      return NextResponse.json(globalComplaintsStore, { status: 200, headers: corsHeaders });
+      return NextResponse.json(currentList, { status: 200, headers: corsHeaders });
     }
 
     if (body.action === "assign") {
       const { id, officerName } = body;
-      const item = globalComplaintsStore.find((c) => c.id === id);
+      const item = currentList.find((c) => c.id === id);
       if (item) {
         item.assignedTo = officerName;
         item.status = "In Progress";
@@ -163,8 +196,9 @@ export async function POST(req: Request) {
           date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
           note: `Assigned to ${officerName}`
         });
+        await saveCloudComplaints(currentList);
       }
-      return NextResponse.json(globalComplaintsStore, { status: 200, headers: corsHeaders });
+      return NextResponse.json(currentList, { status: 200, headers: corsHeaders });
     }
 
     // Default POST: Add new complaint
@@ -174,12 +208,16 @@ export async function POST(req: Request) {
     }
     
     // Unshift to place latest complaint at top
-    const exists = globalComplaintsStore.some((c) => c.id === newComplaint.id);
+    const exists = currentList.some((c) => c.id === newComplaint.id);
     if (!exists) {
-      globalComplaintsStore.unshift(newComplaint);
+      currentList.unshift(newComplaint);
+    } else {
+      const index = currentList.findIndex((c) => c.id === newComplaint.id);
+      if (index !== -1) currentList[index] = newComplaint;
     }
 
-    return NextResponse.json(globalComplaintsStore, { status: 200, headers: corsHeaders });
+    await saveCloudComplaints(currentList);
+    return NextResponse.json(currentList, { status: 200, headers: corsHeaders });
   } catch (err) {
     console.error("API error", err);
     return NextResponse.json({ error: "Failed to process complaint" }, { status: 500, headers: corsHeaders });
